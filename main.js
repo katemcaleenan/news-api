@@ -63,12 +63,13 @@ function searchNews() {
                         $(".loadSearchResults").append(
                             `<li class="one_third ` + first + `">
                                 <figure>
-                                    <div class="banner-title">` + data.response.results[i].sectionName + `</div>
-                                    <img src="` + data.response.results[i].fields.thumbnail + `" style="max-width:325px; border-radius:4px;" alt="">
+                                    <div class="figure-section">` + data.response.results[i].sectionName + `</div>
                                     <figcaption>
                                         <p>` + data.response.results[i].fields.headline + `</p>
-                                        <footer><label class="btn btn-primary"  for="modal_search_` + i + `">Read More</label></footer>
+                                        <footer><label class="btn btn-primary"  for="modal_search_` + i + `">Read Full Story</label>
+                                        </footer>
                                     </figcaption>
+                                    <img src="` + data.response.results[i].fields.thumbnail + `" style="max-width:325px; border-radius:4px;" alt="">
                                 </figure>
                             </li>
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
@@ -111,11 +112,14 @@ function searchNews() {
                         $(".loadSearchResults").append(
                             `<li class="one_third ` + first + `">
                                 <figure>
-                                    <div class="banner-title">` + response.sectionName + `</div>
+                                    <div class="figure-section">` + response.sectionName + `</div>
                                     <img src="` + response.fields.thumbnail + `" alt="">
                                     <figcaption>
                                         <p>` + response.fields.headline + `</p>
-                                        <footer><label class="btn pointer"  for="modal_search_` + o + `">Read More</label></footer>
+                                        <footer>
+                                        <label class="btn pointer"  for="modal_search_` + o + `">Read Full Story</label>
+                                        <div class="figure-section">` + response.sectionName + `</div>
+                                        </footer>
                                     </figcaption>
                                 </figure>
                             </li>

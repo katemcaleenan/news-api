@@ -162,14 +162,14 @@ figure {
     margin-bottom: 30px;
 }
 
-.banner-title {
+.figure-section {
   position: absolute;
-  background: #bae8e8;
-  color: #001335;
+  background: #ffffff;
+  color: #bae8e8;
   font-size: 75%;
   font-weight: 700;
   padding: 0.25em 0.4em !important;
-  margin-left: 10px !important;
+  margin-left: 260px !important;
   margin-top: 10px !important;
   -webkit-border-radius: 0.25rem;
   -moz-border-radius: 0.25rem;
