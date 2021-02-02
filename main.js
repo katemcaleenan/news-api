@@ -64,17 +64,17 @@ function searchNews() {
                             `<li class="one_third ` + first + `">
                                 <figure>
                                     <div class="banner-title">` + data.response.results[i].sectionName + `</div>
-                                    <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                                    <img src="` + data.response.results[i].fields.thumbnail + `" style="max-width:325px; border-radius:4px;" alt="">
                                     <figcaption>
                                         <p>` + data.response.results[i].fields.headline + `</p>
-                                        <footer><label class="btn pointer"  for="modal_search_` + i + `">Read More</label></footer>
+                                        <footer><label class="btn btn-primary"  for="modal_search_` + i + `">Read More</label></footer>
                                     </figcaption>
                                 </figure>
                             </li>
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
                             <div class="modal">
                                 <div class="modal-body">
-                                    <label class="btn_close" for="modal_search_` + i + `">Close</label>
+                                    <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i>Close</label>
                                     <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
                                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
                                     <div class="modal-content">` + data.response.results[i].fields.body + `</div>
