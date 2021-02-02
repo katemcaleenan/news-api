@@ -12,6 +12,7 @@
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link href="styles.css" rel="stylesheet">
   </head>
 
@@ -24,9 +25,11 @@
             <a class="blog-header-logo text-dark" href="#">Uni News</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
-            <div class="search-container">
-                <input type="text" placeholder="Search" name="search" id="search" value=""/>
-                <button type="submit" onclick="searchData();"><i class="fa fa-search"></i></button>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search" name="search" id="search" value=""/>
+              <div class="input-group-append">
+                <button type="submit" class="input-group-text" onclick="searchNews();"><i class="fa fa-search"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +71,7 @@
                     text here
                 </ul>
                 <!-- Button to hide results when user is finished with search -->
-                <label class="search_btn_close" id="closeResults" for="searchContainer">Close Search Results</label>
+                <button type="button" class="btn btn-outline-dark" id="closeResults" for="searchContainer"><i class="fa fa-times"></i> Close Search Results</button>
             </section>
         </main>
     </div>
@@ -230,6 +233,7 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
         <script src="main.js"></script>
+        <script src="https://use.fontawesome.com/3016e4c184.js"></script>
 
 </body>
 </html>
