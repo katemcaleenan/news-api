@@ -61,19 +61,21 @@ function searchNews() {
                             first = "first";
                         }
                         $(".loadSearchResults").append(
-                            `<li class="one_third ` + first + `">
-                                <figure>
-                                    <div class="figure-section">` + data.response.results[i].sectionName + `</div>
-                                    <figcaption>
-                                        <p>` + data.response.results[i].fields.headline + `</p>
-                                        <footer><label class="btn btn-primary"  for="modal_search_` + i + `">Read Full Story</label>
-                                        </footer>
-                                    </figcaption>
-                                    <img src="` + data.response.results[i].fields.thumbnail + `" style="max-width:325px; border-radius:4px;" alt="">
-                                </figure>
-                            </li>
+                            `
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <h5 class="card-header">` + data.response.results[i].sectionName +`</h5>
+                                    <div class="card-body">
+                                        <h5 class="card-title">`+ data.response.results[i].fields.headline +  `</h5>
+                                        <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
+                                        <a href="#" class="btn btn-primary"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+    
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
-                            <div class="modal">
+                            <div class="modal" style="max-width: 100vw; padding: 40px;">
                                 <div class="modal-body">
                                     <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i>Close</label>
                                     <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
