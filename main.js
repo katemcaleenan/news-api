@@ -74,6 +74,7 @@ function searchNews() {
                             </div>
 
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
+                            
                             <div class="modal" style="max-width: 100vw; padding: 40px;">
                                 <div class="modal-body">
                                     <div class="modal-header">
@@ -85,7 +86,8 @@ function searchNews() {
                                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
                                     <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                                 </div>
-                            </div>`
+                            </div>
+                            `
                             );
                         }
                     }
@@ -115,28 +117,31 @@ function searchNews() {
                         }
                         var response = results[o];
                         $(".loadSearchResults").append(
-                            `<li class="one_third ` + first + `">
-                                <figure>
-                                    <div class="figure-section">` + response.sectionName + `</div>
-                                    <img src="` + response.fields.thumbnail + `" alt="">
-                                    <figcaption>
-                                        <p>` + response.fields.headline + `</p>
-                                        <footer>
-                                        <label class="btn pointer"  for="modal_search_` + o + `">Read Full Story</label>
-                                        <div class="figure-section">` + response.sectionName + `</div>
-                                        </footer>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <input class="checker" type="checkbox" id="modal_search_` + o + `">
-                            <div class="modal">
-                                <div class="modal-body">
-                                    <label class="btn_close" for="modal_search_` + o + `">Close</label>
-                                    <h6 class="heading">` + response.fields.headline + `</h6>
-                                    <img src="` + response.fields.thumbnail + `" alt="">
-                                    <div class="modal-content">` + response.fields.body + `</div>
+                            `
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <h5 class="card-header">` + response.sectionName +`</h5>
+                                    <div class="card-body">
+                                        <h5 class="card-title">`+ response.fields.headline +  `</h5>
+                                        <img src="` + response.fields.thumbnail + `" class="card-img-top" alt="">
+                                        <a href="#" class="btn btn-primary"><label for="modal_search_` + o + `">Read Full Story</label></a>
+                                    </div>
                                 </div>
-                            </div>`
+                            </div>
+                            <input class="checker" type="checkbox" id="modal_search_` + o + `">
+                            <div class="modal" style="max-width: 100vw; padding: 40px;">
+                                <div class="modal-body">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">` + response.fields.headline + `</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <label class="btn_close btn btn-outline-dark" for="modal_search_` + o + `"><i class="fa fa-times"></i></label>
+                                        </button>
+                                    </div>
+                                    <img src="` + response.fields.thumbnail + `" alt="">
+                                    <div class="modal-content">` + response.fields.body  + `</div>
+                                </div>
+                            </div>
+                            `
                             );
                         }
                         $(".searchContainer").show();
