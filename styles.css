@@ -237,3 +237,13 @@ figure {
   left: 50%;
   margin-left: -12%;
 }
+
+.sectiontitle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.loadSearchResults {
+  padding: 0;
+}

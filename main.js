@@ -31,7 +31,7 @@ $(document).ready(function(){
 // 6 - If i==3 articles (we already added 3 articles) the variable first user the value "first" for another line 
 // 7 - If call result is within local storage then stringify results.
 // 8 - Add results to local storage using the search input & the value searched.
-// 9 - Render html using for loop to return first 9 results.
+// 9 - Render html using for loop to return first 10 results.
 //**
 function searchNews() {
     var searchInput = $("#search").val();
@@ -55,25 +55,26 @@ function searchNews() {
                         window.localStorage.setItem("search" + searchInput, dataResponse);
                     }
                     $(".loadSearchResults").html("");
-                    for (var i = 0; i <= 8; i++) {
+                    for (var i = 0; i <= 9; i++) {
                         var first = "";
                         if (i % 3 == 0) {
                             first = "first";
                         }
                         $(".loadSearchResults").append(
-                            `<li class="one_third ` + first + `">
-                                <figure>
-                                    <div class="figure-section">` + data.response.results[i].sectionName + `</div>
-                                    <figcaption>
-                                        <p>` + data.response.results[i].fields.headline + `</p>
-                                        <footer><label class="btn btn-primary"  for="modal_search_` + i + `">Read Full Story</label>
-                                        </footer>
-                                    </figcaption>
-                                    <img src="` + data.response.results[i].fields.thumbnail + `" style="max-width:325px; border-radius:4px;" alt="">
-                                </figure>
-                            </li>
+                            `
+                            <div class="col mb-4">
+                                <div class="card h-100">
+                                    <h5 class="card-header">` + data.response.results[i].sectionName +`</h5>
+                                    <div class="card-body">
+                                        <h5 class="card-title">`+ data.response.results[i].fields.headline +  `</h5>
+                                        <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
+                                        <a href="#" class="btn btn-primary"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                                    </div>
+                                </div>
+                            </div>
+
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
-                            <div class="modal">
+                            <div class="modal" style="max-width: 100vw; padding: 40px;">
                                 <div class="modal-body">
                                     <div class="modal-header">
                                         <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
