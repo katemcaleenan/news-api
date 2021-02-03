@@ -77,8 +77,12 @@ function searchNews() {
                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
                             <div class="modal" style="max-width: 100vw; padding: 40px;">
                                 <div class="modal-body">
-                                    <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i>Close</label>
-                                    <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
+                                        </button>
+                                    </div>
                                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
                                     <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                                 </div>
