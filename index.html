@@ -36,19 +36,12 @@
       </header>
 
       <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-          <a class="p-2 text-muted" href="#">World</a>
-          <a class="p-2 text-muted" href="#">U.S.</a>
-          <a class="p-2 text-muted" href="#">Technology</a>
-          <a class="p-2 text-muted" href="#">Design</a>
-          <a class="p-2 text-muted" href="#">Culture</a>
-          <a class="p-2 text-muted" href="#">Business</a>
-          <a class="p-2 text-muted" href="#">Politics</a>
-          <a class="p-2 text-muted" href="#">Opinion</a>
-          <a class="p-2 text-muted" href="#">Science</a>
-          <a class="p-2 text-muted" href="#">Health</a>
-          <a class="p-2 text-muted" href="#">Style</a>
-          <a class="p-2 text-muted" href="#">Travel</a>
+        <nav class="nav d-flex justify-content-between" id="HeaderSec">
+          <a class="p-2 text-muted" data-sec="world" href="?category=world">World news</a>
+          <a class="p-2 text-muted" data-sec="uk" href="?category=sport">Sport</a>
+          <a class="p-2 text-muted" data-sec="politics" href="?category=politics">Politics</a>
+          <a class="p-2 text-muted" data-sec="technology" href="?category=technology">Technology</a>
+          <a class="p-2 text-muted" data-sec="science" href="?category=education">Education</a>
         </nav>
       </div>
 
@@ -59,6 +52,17 @@
           <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
         </div>
       </div>
+
+      <!-- <div class="flourish-embed flourish-chart" data-src="story/230110"> <script src="https://public.flourish.studio/resources/embed.js"></script></div>covid stats widget -->
+      <div>
+        <div class="col-12 col-sm-3">
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush" id="Sections"><!-- Lists all the featured news articles from the api -->
+<p>what is going on</p>
+                </ul>                   
+            </div>
+        </div>
+    </div>
 
       <!-- Search Results Section -->
       <div class="container row3 searchContainer" style="display: none;">
