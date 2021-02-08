@@ -12,152 +12,17 @@ function getUrlParam() {
 $(document).ready(function(){
 
     getSections();
-    console.log('sections')
-    
-
-
-// function sectionNews() {
-//     var section = getUrlParam()["category"];
-//     if (section == null || section == "") {  
-//         section = "world"; //Home section automatically defaults to "World" news category 
-//     }
-//     console.log(section)
-
-//     var selectedHeader = $("#HeaderSec").find("[data-sec='" + section + "']"); //Reads the heading section
-//     $(selectedHeader).addClass("text-success font-weight-bolder"); //highlights the text and changes the font to bold
-//     $(selectedHeader).removeClass("text-muted");
-
-//         $.ajax({
-//             type: "GET",
-//             dataType: "jsonp",
-//             cache: false,
-//             url: "https://content.guardianapis.com/search?section="  + section +"&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8",
-//             success: function (data) {
-//                 console.log(this.url)
-//                 $(".searchContainer").show();
-//                 $('html, body').animate({
-//                     scrollTop: $(".searchContainer").offset().top - 10
-//                 }, 2000);
-//                 if (data.response.total == 0) {
-//                     $(".loadSearchResults").html('No results found against this search.');
-//                 } else {
-//                     if (!window.localStorage.getItem("search" + searchInput)) {
-//                         var dataResponse = JSON.stringify(data.response.results);
-//                         window.localStorage.setItem("search" + searchInput, dataResponse);
-//                     }
-//                     $(".loadSearchResults").html("");
-//                     for (var i = 0; i <= 9; i++) {
-//                         var first = "";
-//                         if (i % 3 == 0) {
-//                             first = "first";
-//                         }
-//                         $(".loadSearchResults").append(
-//                             `
-//                             <div class="col mb-4">
-//                                 <div class="card h-100">
-//                                     <h5 class="card-header">` + data.response.results[i].sectionName +`</h5>
-//                                     <div class="card-body">
-//                                         <h5 class="card-title">`+ data.response.results[i].fields.headline +  `</h5>
-//                                         <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
-//                                         <a href="#" class="btn btn-primary"><label for="modal_search_` + i + `">Read Full Story</label></a>
-//                                     </div>
-//                                 </div>
-//                             </div>
-
-//                             <input class="checker" type="checkbox" id="modal_search_` + i + `">
-                            
-//                             <div class="modal" style="max-width: 100vw; padding: 40px;">
-//                                 <div class="modal-body">
-//                                     <div class="modal-header">
-//                                         <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
-//                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                                             <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
-//                                         </button>
-//                                     </div>
-//                                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-//                                     <div class="modal-content">` + data.response.results[i].fields.body + `</div>
-//                                 </div>
-//                             </div>
-//                             `
-//                             );
-//                         }
-//                     }
-//                 },
-//             })
-
-//             //------------------------------------------------------ OFFLINE ------------------------------------------//
-//             //**
-//             // 1 - If the API call fails then check if the search input exists by searching local storage.
-//             // 2 - Parse the results of the search value from local storage into a JSON file and the render HTML.
-//             //**
-        
-//             .fail(function (jqXHR, textStatus, errorThrown) {
-//                 if ($(".loadSearchResults").html(""),
-//                 $(".searchContainer").show(),
-//                 $("html, body").animate({
-//                     scrollTop: $(".searchContainer").offset().top - 10
-//                 }, 2000),
-//                 window.localStorage.getItem("search" + searchInput)
-//                 ) {
-//                     searchResults = window.localStorage.getItem("search"+ searchInput);
-//                     results = JSON.parse(searchResults);
-//                     for (var o = 0; o < results.length; o++) {
-//                         var first = "";
-//                         if (o % 3 == 0) {
-//                             first = "first";
-//                         }
-//                         var response = results[o];
-//                         $(".loadSearchResults").append(
-//                             `
-//                             <div class="col mb-4">
-//                                 <div class="card h-100">
-//                                     <h5 class="card-header">` + response.sectionName +`</h5>
-//                                     <div class="card-body">
-//                                         <h5 class="card-title">`+ response.fields.headline +  `</h5>
-//                                         <img src="` + response.fields.thumbnail + `" class="card-img-top" alt="">
-//                                         <a href="#" class="btn btn-primary"><label for="modal_search_` + o + `">Read Full Story</label></a>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             <input class="checker" type="checkbox" id="modal_search_` + o + `">
-//                             <div class="modal" style="max-width: 100vw; padding: 40px;">
-//                                 <div class="modal-body">
-//                                     <div class="modal-header">
-//                                         <h5 class="modal-title">` + response.fields.headline + `</h5>
-//                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-//                                             <label class="btn_close btn btn-outline-dark" for="modal_search_` + o + `"><i class="fa fa-times"></i></label>
-//                                         </button>
-//                                     </div>
-//                                     <img src="` + response.fields.thumbnail + `" alt="">
-//                                     <div class="modal-content">` + response.fields.body  + `</div>
-//                                 </div>
-//                             </div>
-//                             `
-//                             );
-//                         }
-//                         $(".searchContainer").show();
-//                     } else {
-//                         console.log("no results"), $(".loadSearchResults").html("No data found against this search.");
-//                     }
-//                 })
-//             } 
 });
 
-//------------------------------------------------------- UK STOREIS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
+//------------------------------------------------------- CATEGORIES ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
     //**
-    //Step 1 - Searching for the term UK and then ordering the results order of RELEVANCE
-    //Step 2 - Creating an array for uk news and storying them in the local storage using headline as the key
-    //Step 3 - Initiating the html of the news section which here is uk
-    //Step 4 - Creating a loop for the API call to do the function 9 times
-    //Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
-    //Step 5 - Seperating the keys to array of world breaking the string by headline by dimeter "%%"
-    //Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
-    //Step 7 - add html to the "loadUKStories" block resulting in the headline, date and thumbnial being output in cards
-    //Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
-    //Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
-    //Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
-    //Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
+    //Step 1 - Searching for the section that was selected using the "data-sec" value and then ordering the results order of relevance
+    //Step 2 - Creating an array for category then storing in the local storage with headline as the key
+    //Step 3 - Render HTML looping through the top 9 stories
+    //Step 4 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
+    //Step 5 - Seperating the keys into sections breaking the string by headline by dimeter "%%"
+    //Step 6 - Develop modal when clicked "read more" using check box 
     //**      
     function getSections() {
         var section = getUrlParam()["category"];
@@ -168,7 +33,7 @@ $(document).ready(function(){
             $(selectedHeader).addClass("text-success font-weight-bolder"); //highlights the text and changes the font to bold
             $(selectedHeader).removeClass("text-muted");
 
-            const guardianSectionAPI = "https://content.guardianapis.com/search?section=" + section + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline";
+            const guardianSectionAPI = "https://content.guardianapis.com/search?section=" + section + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline";
 
             
     console.log(section)
@@ -178,41 +43,36 @@ $(document).ready(function(){
             cache: false,
             url: guardianSectionAPI,
             success: function (data) {
-                console.log(data)
-                window.localStorage.setItem("sports", "");
+                window.localStorage.setItem(section, "");
+                console.log(section)
                 $("#Sections").html('');
                 for (var i = 0; i < 9; i++) {
-                    var first = "";
-                    if (i == 0 || i == 3 || i == 6) {
-                        first = "first";
-                    }
                     if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
                         var dataString = JSON.stringify(data.response.results[i]);
                         window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
                     }
-                    window.localStorage.setItem("sports", window.localStorage.getItem("sports") + "%%" + data.response.results[i].fields.headline)
-                    var dt2 = new Date(data.response.results[i].webPublicationDate);
-                    // var res = diff_minutes(dt2);
-                    $("#Sections").append(`<li class="one_third ` + first + `">
-                                    <figure>
-                                        <div class="banner-title">` + data.response.results[i].sectionName + `</div>
-                                        <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                                        <figcaption>
-                                            <p>` + data.response.results[i].fields.headline + `</p>
-                                            
-                                            <footer><label class="btn pointer"  for="modal_ukstories_` + i + `">Read More</label></footer>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <input class="checker" type="checkbox" id="modal_ukstories_` + i + `">
+                    window.localStorage.setItem(section, window.localStorage.getItem(section) + "%%" + data.response.results[i].fields.headline)
+                    $("#Sections").append(`
+                        <div class="card flex-md-row mb-4 box-shadow">
+                        <div class="card-body d-flex flex-column align-items-start">
+                        <div class="banner-title">` + data.response.results[i].sectionName + `</div>
+                            <h3 class="mb-0">
+                            <p>` + data.response.results[i].fields.headline + `</p>
+                            </h3>
+                            <div>` + data.response.results[i].fields.trailText + `</div>
+                            <div>` + data.response.results[i].fields.main + `</div>
+                            <footer><label class="btn btn-primary"  for="modal_section_` + i + `">Read More</label></footer>
+                        </div>
+                        </div>
+                    <input class="checker" type="checkbox" id="modal_section_` + i + `">
                                 <div class="modal">
                                     <div class="modal-body">
-                                        <label class="btn_close" for="modal_ukstories_` + i + `">Close</label>
+                                        <label class="btn_close" for="modal_section_` + i + `">Close</label>
                                         <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
-                                        <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
                                         <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                                     </div>
-                                </div>`);
+                                </div>
+                                `);
                 }
             }
 
@@ -226,42 +86,36 @@ $(document).ready(function(){
 //Step 6 - loop through keys like normal and get date from local storage 
 //** 
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            $(".loadUKStories").html('');
-            if (!window.localStorage.getItem("ukStories")) {
+            $("#Sections").html('');
+            if (!window.localStorage.getItem(section)) {
                 console.log('no results');
-                $(".loadUKStories").html('No data found against this search.');
+                $("#Sections").html('No data found against this search.');
             } else {
-                resultss = window.localStorage.getItem("ukStories").split('%%');
+                resultss = window.localStorage.getItem(section).split('%%');
                 for(var i=0; i<resultss.length;i++){
-                    var first = "";
-                    
-                    if ((i-1) % 3 == 0) {
-                        first = "first";
-                    }
                     var result = JSON.parse(window.localStorage.getItem(resultss[i]));
                     if(result){
-                        var dt2 = new Date(result.webPublicationDate);
-                        var res = diff_minutes(dt2);
-                        $(".loadUKStories").append(`<li class="one_third ` + first + `">
-                        <figure>
-                            <div class="banner-title">` + result.sectionName + `</div>
-                            <img src="` + result.fields.thumbnail + `" alt="">
-                            <figcaption>
-                                <p>` + result.fields.headline + `</p>
-                                <p class="time-difference"><small><em>` + res + `</em></small></p>
-                                <footer><label class="btn pointer"  for="modal_ukstories_` + i + `">Read More</label></footer>
-                            </figcaption>
-                        </figure>
-                    </li>
-                    <input class="checker" type="checkbox" id="modal_ukstories_` + i + `">
-                    <div class="modal">
-                        <div class="modal-body">
-                            <label class="btn_close" for="modal_ukstories_` + i + `">Close</label>
-                            <h6 class="heading">` + result.fields.headline + `</h6>
-                            <img src="` + result.fields.thumbnail + `" alt="">
-                            <div class="modal-content">` + result.fields.body + `</div>
+                        $("#Sections").append(`
+                                    <div class="card flex-md-row mb-4 box-shadow">
+                <div class="card-body d-flex flex-column align-items-start">
+                <div class="banner-title">` + result.sectionName + `</div>
+                    <h3 class="mb-0">
+                    <p>` + result.headline + `</p>
+                    </h3>
+                    <div>` + result.trailText + `</div>
+                    <div>` + result.main + `</div>
+                    <footer><label class="btn btn-primary"  for="modal_section_` + i + `">Read More</label></footer>
+                </div>
+                </div>
+            <input class="checker" type="checkbox" id="modal_section_` + i + `">
+                        <div class="modal">
+                            <div class="modal-body">
+                                <label class="btn_close" for="modal_section_` + i + `">Close</label>
+                                <h6 class="heading">` + result.headline + `</h6>
+                                <div class="modal-content">` + result.body + `</div>
+                            </div>
                         </div>
-                    </div>`);
+                    `);
                     }
                    
                 }
