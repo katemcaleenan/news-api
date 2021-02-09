@@ -1,17 +1,24 @@
 /* stylelint-disable selector-list-comma-newline-after */
-.card,
-.blog-post,
-.sidebar-content,
-.blog-footer {
-  background-color: #bae8e8 !important;
+.content {
+  background-color: #eff0f3;
 }
 
 .sidebar-content {
   border-radius: 4px;
 }
 
+.tag {
+  background: red;
+  color: #fff;
+  font-size: 75%;
+  font-weight: 700;
+  padding: 0.25em 0.4em !important;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+}
+
 .container {
-  background-color: #ffffff;
   border-radius: 4px;
 }
 
@@ -165,7 +172,7 @@ figure {
 .figure-section {
   position: absolute;
   background: #ffffff;
-  color: #bae8e8;
+  color: red;
   font-size: 75%;
   font-weight: 700;
   padding: 0.25em 0.4em !important;
@@ -216,7 +223,7 @@ figure {
   text-align: center;
 }
 #introblocks figure {
-  background-color: #bae8e8;
+  background-color:red;
   min-height: 230px !important;
   border-radius: 5px;
   border-color: #cdcdcd;

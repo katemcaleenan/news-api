@@ -30,7 +30,7 @@ $(document).ready(function(){
         section = "world"; //Home section automatically defaults to "World" news category 
     }
         var selectedHeader = $("#HeaderSec").find("[data-sec='" + section + "']"); //Reads the heading section
-            $(selectedHeader).addClass("text-success font-weight-bolder"); //highlights the text and changes the font to bold
+            $(selectedHeader).addClass("text-danger font-weight-bolder"); //highlights the text and changes the font to bold
             $(selectedHeader).removeClass("text-muted");
 
             const guardianSectionAPI = "https://content.guardianapis.com/search?section=" + section + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline";
@@ -55,13 +55,13 @@ $(document).ready(function(){
                     $("#Sections").append(`
                         <div class="card flex-md-row mb-4 box-shadow">
                         <div class="card-body d-flex flex-column align-items-start">
-                        <div class="banner-title">` + data.response.results[i].sectionName + `</div>
+                        <div class="tag">` + data.response.results[i].sectionName + `</div>
                             <h3 class="mb-0">
                             <p>` + data.response.results[i].fields.headline + `</p>
                             </h3>
                             <div>` + data.response.results[i].fields.trailText + `</div>
                             <div>` + data.response.results[i].fields.main + `</div>
-                            <footer><label class="btn btn-primary"  for="modal_section_` + i + `">Read More</label></footer>
+                            <footer><label class="btn btn-danger"  for="modal_section_` + i + `">Read More</label></footer>
                         </div>
                         </div>
                     <input class="checker" type="checkbox" id="modal_section_` + i + `">
@@ -104,7 +104,7 @@ $(document).ready(function(){
                     </h3>
                     <div>` + result.trailText + `</div>
                     <div>` + result.main + `</div>
-                    <footer><label class="btn btn-primary"  for="modal_section_` + i + `">Read More</label></footer>
+                    <footer><label class="btn btn-danger"  for="modal_section_` + i + `">Read More</label></footer>
                 </div>
                 </div>
             <input class="checker" type="checkbox" id="modal_section_` + i + `">
@@ -176,7 +176,7 @@ function searchNews() {
                                     <div class="card-body">
                                         <h5 class="card-title">`+ data.response.results[i].fields.headline +  `</h5>
                                         <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
-                                        <a href="#" class="btn btn-primary"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                                        <a href="#" class="btn btn-danger"><label for="modal_search_` + i + `">Read Full Story</label></a>
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +232,7 @@ function searchNews() {
                                     <div class="card-body">
                                         <h5 class="card-title">`+ response.fields.headline +  `</h5>
                                         <img src="` + response.fields.thumbnail + `" class="card-img-top" alt="">
-                                        <a href="#" class="btn btn-primary"><label for="modal_search_` + o + `">Read Full Story</label></a>
+                                        <a href="#" class="btn btn-danger"><label for="modal_search_` + o + `">Read Full Story</label></a>
                                     </div>
                                 </div>
                             </div>

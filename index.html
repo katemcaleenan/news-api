@@ -13,110 +13,113 @@
       <link href="styles.css" rel="stylesheet">
    </head>
    <body>
-      <div class="container">
-         <header class="blog-header py-3">
-            <div class="row flex-nowrap justify-content-between">
-               <div class="col-4">
-                  <a class="blog-header-logo text-dark" href="#">Uni News</a>
-               </div>
-               <div class="col-4 d-flex justify-content-end align-items-center">
-                  <div class="input-group mb-3">
-                     <input type="text" class="form-control" placeholder="Search" name="search" id="search" value=""/>
-                     <div class="input-group-append">
-                        <button type="submit" class="input-group-text" onclick="searchNews();"><i class="fa fa-search"></i></button>
+      <div class="content">
+         <div class="container">
+            <header class="blog-header py-3">
+               <div class="row flex-nowrap justify-content-between">
+                  <div class="col-4">
+                     <a class="blog-header-logo text-dark" href="#">Uni News</a>
+                  </div>
+                  <div class="col-4 d-flex justify-content-end align-items-center">
+                     <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search" value=""/>
+                        <div class="input-group-append">
+                           <button type="submit" class="input-group-text" onclick="searchNews();"><i class="fa fa-search"></i></button>
+                        </div>
                      </div>
                   </div>
                </div>
+            </header>
+            <!-- Navigation Section -->
+            <div class="nav-scroller py-1 mb-2">
+               <nav class="nav d-flex justify-content-between" id="HeaderSec">
+                  <a class="p-2 text-muted" data-sec="world" href="?category=world">World news</a>
+                  <a class="p-2 text-muted" data-sec="sport" href="?category=sport">Sport</a>
+                  <a class="p-2 text-muted" data-sec="politics" href="?category=politics">Politics</a>
+                  <a class="p-2 text-muted" data-sec="technology" href="?category=technology">Technology</a>
+                  <a class="p-2 text-muted" data-sec="education" href="?category=education">Education</a>
+               </nav>
             </div>
-         </header>
-         <!-- Navigation Section -->
-         <div class="nav-scroller py-1 mb-2">
-            <nav class="nav d-flex justify-content-between" id="HeaderSec">
-               <a class="p-2 text-muted" data-sec="world" href="?category=world">World news</a>
-               <a class="p-2 text-muted" data-sec="sport" href="?category=sport">Sport</a>
-               <a class="p-2 text-muted" data-sec="politics" href="?category=politics">Politics</a>
-               <a class="p-2 text-muted" data-sec="technology" href="?category=technology">Technology</a>
-               <a class="p-2 text-muted" data-sec="education" href="?category=education">Education</a>
-            </nav>
-         </div>
-         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-            <div class="col-md-6 px-0">
-               <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-               <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-               <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
-            </div>
-         </div>
-         <!-- Search Results Section -->
-         <div class="container row3 searchContainer" style="display: none;">
-            <div class="row d-flex justify-content-center">
-               <div class="col-12 col-sm-9" id="introblocks">
-                  <div class="sectiontitle">
-                     <p class="heading underline font-x2">Search Results</p>
-                     <!-- Button to hide results when user is finished with search -->
-                     <button type="button" class="btn btn-outline-dark" id="closeResults" for="searchContainer"><i class="fa fa-times"></i> Close</button>
-                  </div>
-                  <ul class="row row-cols-1 row-cols-md-2 loadSearchResults">
-                  </ul>
+
+            <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+               <div class="col-md-6 px-0">
+                  <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
+                  <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
+                  <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Continue reading...</a></p>
                </div>
             </div>
+            <!-- Search Results Section -->
+            <div class="container row3 searchContainer" style="display: none;">
+               <div class="row d-flex justify-content-center">
+                  <div class="col-12 col-sm-9" id="introblocks">
+                     <div class="sectiontitle">
+                        <p class="heading underline font-x2">Search Results</p>
+                        <!-- Button to hide results when user is finished with search -->
+                        <button type="button" class="btn btn-outline-dark" id="closeResults" for="searchContainer"><i class="fa fa-times"></i> Close</button>
+                     </div>
+                     <ul class="row row-cols-1 row-cols-md-2 loadSearchResults">
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <!-- <div class="flourish-embed flourish-chart" data-src="story/230110"> <script src="https://public.flourish.studio/resources/embed.js"></script></div>covid stats widget -->
          </div>
-         <!-- <div class="flourish-embed flourish-chart" data-src="story/230110"> <script src="https://public.flourish.studio/resources/embed.js"></script></div>covid stats widget -->
+         <main role="main" class="container">
+            <div class="row">
+               <div class="col-md-8 blog-main">
+                  <div class="section-post" id="Sections">
+                     <div class="d-flex align-items-center ml-4">
+                        <!-- Loading state -->
+                        <strong>Loading...</strong> 
+                        <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
+                     </div>
+                  </div>
+                  <!-- /.section-post -->
+               </div>
+               <!-- /.blog-main -->
+               <aside class="col-md-4 blog-sidebar">
+                  <div class="p-3 mb-3 bg-light rounded sidebar-content">
+                     <h4 class="font-italic">About</h4>
+                     <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                  </div>
+                  <div class="p-3 sidebar-content">
+                     <h4 class="font-italic">Archives</h4>
+                     <ol class="list-unstyled mb-0">
+                        <li><a href="#">March 2014</a></li>
+                        <li><a href="#">February 2014</a></li>
+                        <li><a href="#">January 2014</a></li>
+                        <li><a href="#">December 2013</a></li>
+                        <li><a href="#">November 2013</a></li>
+                        <li><a href="#">October 2013</a></li>
+                        <li><a href="#">September 2013</a></li>
+                        <li><a href="#">August 2013</a></li>
+                        <li><a href="#">July 2013</a></li>
+                        <li><a href="#">June 2013</a></li>
+                        <li><a href="#">May 2013</a></li>
+                        <li><a href="#">April 2013</a></li>
+                     </ol>
+                  </div>
+                  <div class="p-3 sidebar-content">
+                     <h4 class="font-italic">Elsewhere</h4>
+                     <ol class="list-unstyled">
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                     </ol>
+                  </div>
+               </aside>
+               <!-- /.blog-sidebar -->
+            </div>
+            <!-- /.row -->
+         </main>
+         <!-- /.container -->
+         <footer class="blog-footer">
+            <p>By Kate McAleenan.</p>
+            <p>
+               <a href="#">Back to top</a>
+            </p>
+         </footer>
       </div>
-      <main role="main" class="container">
-         <div class="row">
-            <div class="col-md-8 blog-main">
-               <div class="section-post" id="Sections">
-                  <div class="d-flex align-items-center ml-4">
-                     <!-- Loading state -->
-                     <strong>Loading...</strong> 
-                     <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
-                  </div>
-               </div>
-               <!-- /.section-post -->
-            </div>
-            <!-- /.blog-main -->
-            <aside class="col-md-4 blog-sidebar">
-               <div class="p-3 mb-3 bg-light rounded sidebar-content">
-                  <h4 class="font-italic">About</h4>
-                  <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-               </div>
-               <div class="p-3 sidebar-content">
-                  <h4 class="font-italic">Archives</h4>
-                  <ol class="list-unstyled mb-0">
-                     <li><a href="#">March 2014</a></li>
-                     <li><a href="#">February 2014</a></li>
-                     <li><a href="#">January 2014</a></li>
-                     <li><a href="#">December 2013</a></li>
-                     <li><a href="#">November 2013</a></li>
-                     <li><a href="#">October 2013</a></li>
-                     <li><a href="#">September 2013</a></li>
-                     <li><a href="#">August 2013</a></li>
-                     <li><a href="#">July 2013</a></li>
-                     <li><a href="#">June 2013</a></li>
-                     <li><a href="#">May 2013</a></li>
-                     <li><a href="#">April 2013</a></li>
-                  </ol>
-               </div>
-               <div class="p-3 sidebar-content">
-                  <h4 class="font-italic">Elsewhere</h4>
-                  <ol class="list-unstyled">
-                     <li><a href="#">GitHub</a></li>
-                     <li><a href="#">Twitter</a></li>
-                     <li><a href="#">Facebook</a></li>
-                  </ol>
-               </div>
-            </aside>
-            <!-- /.blog-sidebar -->
-         </div>
-         <!-- /.row -->
-      </main>
-      <!-- /.container -->
-      <footer class="blog-footer">
-         <p>By Kate McAleenan.</p>
-         <p>
-            <a href="#">Back to top</a>
-         </p>
-      </footer>
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
