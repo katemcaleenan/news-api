@@ -5,7 +5,7 @@ $(document).ready(function(){
         $(".variable").slick({
             dots: true,
             autoplay: true,
-            autoplaySpeed: 5000
+            autoplaySpeed: 3000
         });
 
     })
@@ -31,7 +31,7 @@ $(document).ready(function(){
         dataType: "jsonp",
         cache: false,
         // get the latest stories by 'newest' endpoint tag
-        url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=7107db70-ed56-4803-b68d-be4ee6794409&show-fields=thumbnail,body,headline",
+        url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
         success: function (data) {
             window.localStorage.setItem("top", "");
             for (var i = 0; i < 7; i++) {
@@ -39,14 +39,12 @@ $(document).ready(function(){
                     var dataString = JSON.stringify(data.response.results[i]);
                     window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
                 }
-                var j=i+10;
-                //console.log(j);
                 window.localStorage.setItem("top", window.localStorage.getItem("top") + "%%" + data.response.results[i].fields.headline)
-                $("#slider" + i + " > img").attr("src", data.response.results[i].fields.thumbnail);
-                $("#slider" + i + " > img").attr("alt", data.response.results[i].fields.headline);
-                
-                $("#slider" + i).append(`<figcaption class="caption_trending_topics">
-                <p ><label style ="font-size:1.1em;" class="pointer slider-label" for="modal_top_` + i + `">` + data.response.results[i].fields.headline + '<span style="color:#b8a169;"> Full Story Here &raquo; </span> ' + `</label></p>
+                $("#slider" + i).append(`
+                <figcaption class="caption_trending_topics">
+                <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                <p ><label style ="font-size:1.1em;" class="pointer slider-label" for="modal_top_` + i + `"><span style="color:#b8a169;"> Full Story Here &raquo; </span> </label></p>
                 </figcaption>
                `);
                 $("#topStories").append(`
