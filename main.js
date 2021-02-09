@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    console.log('doc ready')
+    
+    getSections();
+});
+
 function getUrlParam() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -8,11 +14,6 @@ function getUrlParam() {
     }
     return vars;
 }
-
-$(document).ready(function(){
-
-    getSections();
-});
 
 //------------------------------------------------------- CATEGORIES ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
@@ -25,6 +26,8 @@ $(document).ready(function(){
     //Step 6 - Develop modal when clicked "read more" using check box 
     //**      
     function getSections() {
+
+        console.log('sections function called')
         var section = getUrlParam()["category"];
     if (section == null || section == "") {  
         section = "world"; //Home section automatically defaults to "World" news category 
