@@ -1,7 +1,97 @@
-$(document).ready(function(){
-    console.log('doc ready')
-    
+$(document).ready(function(){    
     getSections();
+
+    $(function() {
+        $(".variable").slick({
+            dots: true,
+            autoplay: true,
+            autoplaySpeed: 5000
+        });
+
+    })
+
+    //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
+// ONLINE FUNCTION
+    //**
+    //Step 1 - Searching for anything ordering the results order of Newest
+    //Step 2 - Creating an array for trending news and storying them in the local storage using headline as the key
+    //Step 3 - Initiating the html of the news section which here is uk
+    //Step 4 - Creating a loop for the API call to do the function 7 times
+    //Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
+    //Step 5 - Seperating the keys to array of top stories breaking the string by headline by dimeter "%%"
+    //Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
+    //Step 7 - add html to the "top" block resulting in the headline, date and thumbnial being output in cards
+    //Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
+    //Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
+    //Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
+    //Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
+    //**  
+    $.ajax({
+        type: "GET",
+        dataType: "jsonp",
+        cache: false,
+        // get the latest stories by 'newest' endpoint tag
+        url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=7107db70-ed56-4803-b68d-be4ee6794409&show-fields=thumbnail,body,headline",
+        success: function (data) {
+            window.localStorage.setItem("top", "");
+            for (var i = 0; i < 7; i++) {
+                if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
+                    var dataString = JSON.stringify(data.response.results[i]);
+                    window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
+                }
+                var j=i+10;
+                //console.log(j);
+                window.localStorage.setItem("top", window.localStorage.getItem("top") + "%%" + data.response.results[i].fields.headline)
+                $("#slider" + i + " > img").attr("src", data.response.results[i].fields.thumbnail);
+                $("#slider" + i + " > img").attr("alt", data.response.results[i].fields.headline);
+                
+                $("#slider" + i).append(`<figcaption class="caption_trending_topics">
+                <p ><label style ="font-size:1.1em;" class="pointer slider-label" for="modal_top_` + i + `">` + data.response.results[i].fields.headline + '<span style="color:#b8a169;"> Full Story Here &raquo; </span> ' + `</label></p>
+                </figcaption>
+               `);
+                $("#topStories").append(`
+                <input class="checker" type="checkbox" id="modal_top_` + i + `">
+               <div class="modal">
+                    <div class="modal-body">
+                        <label class="btn_close" for="modal_top_` + i + `">Close</label>
+                        <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                        <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                    <div class="modal-content">` + data.response.results[i].fields.body + `</div>
+                    </div>
+            </div>`);
+            }
+        }
+
+//OFFLINE FUNCTION
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        result = window.localStorage.getItem("top");
+        results =result.split('%%')
+            for (var i = 0; i < 7; i++) {
+                console.log(results[i+1]);
+                var data = JSON.parse(window.localStorage.getItem(results[i+1]));
+                // image of article
+                $("#slider" + i + " > img").attr("src", data.fields.thumbnail);
+                // headline of article
+                $("#slider" + i + " > img").attr("alt", data.fields.headline);
+                //outputting headline followed by.. 
+                $("#slider" + i).append(`<figcaption class="caption_trending_topics">
+                <p><label class="pointer" for="modal_top_+ i +">` + data.fields.headline + `</label></p>
+                </figcaption>
+               `);
+                // generating the model if user clicks to view more
+                $("#topStories").append(`
+                <input class="checker" type="checkbox" id="modal_top_+ i +">
+                <div class="modal">
+                    <div class="modal-body">
+                        <label class="btn_close" for="modal_top_+ i +">Close</label>
+                        <h6 class="heading">` + data.fields.headline + `</h6>
+                        <img src="+ data.fields.thumbnail +" alt="">
+                    <div class="modal-content">` + data.fields.body + `</div>
+                    </div>
+                </div>`);
+            }
+        
+})
 });
 
 function getUrlParam() {
@@ -266,6 +356,7 @@ function searchNews() {
                 $(".loadSearchResults").html(""))
              } 
 }
+
 
 //------------------------------------------------------ CLOSE SEARCH -------------------------------------------------//
 //**
