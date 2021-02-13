@@ -43,15 +43,15 @@
                </nav>
             </div>
 
-
-            <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="row">
+            <div class="jumbotron ml-3 mr-3 col-md-8 p-md-5 text-white rounded bg-danger">
                <div class="section-topstories" id="topStories">
                   <section id="introblocks top_stories_title">
                        <div class="sectiontitle trending_section">
-                          <p class="heading underline font-x2">Latest Top Stories</p>
+                        <h4 class="font-italic">Recent Top Stories</h4>
               </div>
               </section>
-              <div class="variable slider">
+              <div class="slides slider">
                <div id="slider0"></div>
                <div id="slider1"></div>
                <div id="slider2"></div>
@@ -62,6 +62,10 @@
              </div>
               </div>
             </div>
+                 <div class="p-3 mb-3 bg-light rounded sidebar-content">
+                  <div class="elfsight-app-d70ca721-4374-49d1-be10-3281c4bbebd3"></div>
+               </div>
+         </div>
             <!-- Search Results Section -->
             <div class="container row3 searchContainer" style="display: none;">
                <div class="row d-flex justify-content-center">
@@ -76,7 +80,6 @@
                   </div>
                </div>
             </div>
-            <!-- <div class="flourish-embed flourish-chart" data-src="story/230110"> <script src="https://public.flourish.studio/resources/embed.js"></script></div>covid stats widget -->
          </div>
          <main role="main" class="container">
             <div class="row">
@@ -93,32 +96,9 @@
                <!-- /.blog-main -->
                <aside class="col-md-4 blog-sidebar">
                   <div class="p-3 mb-3 bg-light rounded sidebar-content">
-<div class="elfsight-app-d70ca721-4374-49d1-be10-3281c4bbebd3"></div>
-                  </div>
-                  <div class="p-3 sidebar-content">
-                     <h4 class="font-italic">Archives</h4>
-                     <ol class="list-unstyled mb-0">
-                        <li><a href="#">March 2014</a></li>
-                        <li><a href="#">February 2014</a></li>
-                        <li><a href="#">January 2014</a></li>
-                        <li><a href="#">December 2013</a></li>
-                        <li><a href="#">November 2013</a></li>
-                        <li><a href="#">October 2013</a></li>
-                        <li><a href="#">September 2013</a></li>
-                        <li><a href="#">August 2013</a></li>
-                        <li><a href="#">July 2013</a></li>
-                        <li><a href="#">June 2013</a></li>
-                        <li><a href="#">May 2013</a></li>
-                        <li><a href="#">April 2013</a></li>
-                     </ol>
-                  </div>
-                  <div class="p-3 sidebar-content">
-                     <h4 class="font-italic">Elsewhere</h4>
-                     <ol class="list-unstyled">
-                        <li><a href="#">GitHub</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Facebook</a></li>
-                     </ol>
+                     <h4 class="font-italic">Trending</h4>
+                            <ul class="nospace group btmspace-80 loadTrendingNews"></ul>
+            
                   </div>
                </aside>
                <!-- /.blog-sidebar -->
