@@ -496,3 +496,69 @@ function searchNews() {
 $( "#closeResults" ).click(function() {
     $( ".searchContainer" ).slideUp(2000);
  });
+
+//---------------------------------------------------- Driver.js Walkthrough Scripting -----------------------------------------------------------------//
+ //**
+ // This code below is the JS for driver.js helper tool to identify what is said at each part of the walkthrough
+ // The tool is being instructed to highlight each section by the id or class name, then renders the information in a popover
+ //  https://github.com/kamranahmedse/driver.js
+ //**
+
+ $( "#help" ).click(function() {
+ // Start the introduction
+ driver.start();
+});
+
+const driver = new Driver();
+// Define the steps for introduction
+driver.defineSteps([
+  {
+    element: '#help',
+    popover: {
+      className: 'first-step-popover-class',
+      title: 'Take a guided tour',
+      description: 'Learn how to use search and find useful information',
+      position: 'left'
+    }
+  },
+  {
+    element: '#search',
+    popover: {
+      title: 'Search',
+      description: 'Enter a term and click the search icon and view the articles',
+      position: 'bottom'
+    }
+  },
+  {
+   element: '#politics',
+   popover: {
+     title: 'Specific news sections',
+     description: 'Click any section and view the results of the section',
+     position: 'bottom'
+   }
+ },
+ {
+    element: '#Sections',
+    popover: {
+      title: 'Specific news sections',
+      description: 'View the stories on that section',
+      position: 'top'
+    }
+  },
+  {
+    element: '#trending',
+    popover: {
+      title: 'What is trending?',
+      description: 'View the stories on the latest trending news',
+      position: 'left'
+    }
+  },
+  {
+    element: '#weather',
+    popover: {
+      title: 'The weather',
+      description: 'Find out the weather where you are',
+      position: 'left'
+    }
+  },
+]);

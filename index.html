@@ -12,6 +12,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" crossorigin="anonymous">
       <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
       <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
       <link href="styles.css" rel="stylesheet">
    </head>
    <body>
@@ -37,35 +38,35 @@
                <nav class="nav d-flex justify-content-between" id="HeaderSec">
                   <a class="p-2 text-muted" data-sec="world" href="?category=world">World news</a>
                   <a class="p-2 text-muted" data-sec="sport" href="?category=sport">Sport</a>
-                  <a class="p-2 text-muted" data-sec="politics" href="?category=politics">Politics</a>
+                  <a class="p-2 text-muted" id="politics" data-sec="politics" href="?category=politics">Politics</a>
                   <a class="p-2 text-muted" data-sec="technology" href="?category=technology">Technology</a>
                   <a class="p-2 text-muted" data-sec="education" href="?category=education">Education</a>
+                  <a class="p-2 text-muted" id="help">Help?</a>
                </nav>
             </div>
-
             <div class="row">
-            <div class="jumbotron ml-3 mr-3 col-md-8 p-md-5 text-white rounded bg-danger">
-               <div class="section-topstories" id="topStories">
-                  <section id="introblocks top_stories_title">
-                       <div class="sectiontitle trending_section">
-                        <h4 class="font-italic">Recent Top Stories</h4>
-              </div>
-              </section>
-              <div class="slides slider">
-               <div id="slider0"></div>
-               <div id="slider1"></div>
-               <div id="slider2"></div>
-               <div id="slider3"></div>
-               <div id="slider4"></div>
-               <div id="slider5"></div>
-               <div id="slider6"></div>
-             </div>
-              </div>
-            </div>
-                 <div class="p-3 mb-3 bg-light rounded sidebar-content">
+               <div class="jumbotron ml-3 mr-3 col-md-8 p-md-5 text-white rounded bg-danger">
+                  <div class="section-topstories" id="topStories">
+                     <section id="introblocks top_stories_title">
+                        <div class="sectiontitle trending_section">
+                           <h4 class="font-italic">Recent Top Stories</h4>
+                        </div>
+                     </section>
+                     <div class="slides slider">
+                        <div id="slider0"></div>
+                        <div id="slider1"></div>
+                        <div id="slider2"></div>
+                        <div id="slider3"></div>
+                        <div id="slider4"></div>
+                        <div id="slider5"></div>
+                        <div id="slider6"></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="p-3 mb-3 bg-light rounded sidebar-content" id="weather">
                   <div class="elfsight-app-d70ca721-4374-49d1-be10-3281c4bbebd3"></div>
                </div>
-         </div>
+            </div>
             <!-- Search Results Section -->
             <div class="container row3 searchContainer" style="display: none;">
                <div class="row d-flex justify-content-center">
@@ -96,9 +97,8 @@
                <!-- /.blog-main -->
                <aside class="col-md-4 blog-sidebar">
                   <div class="p-3 mb-3 bg-light rounded sidebar-content">
-                     <h4 class="font-italic">Trending</h4>
-                            <ul class="nospace group btmspace-80 loadTrendingNews"></ul>
-            
+                     <h4 class="font-italic" id="trending">Trending</h4>
+                     <ul class="nospace group btmspace-80 loadTrendingNews"></ul>
                   </div>
                </aside>
                <!-- /.blog-sidebar -->
@@ -119,6 +119,7 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"
          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
          crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"> </script>
       <script src="main.js"></script>
       <script src="https://use.fontawesome.com/3016e4c184.js"></script>
