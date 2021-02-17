@@ -12,16 +12,16 @@ $(document).ready(function(){
 
 //------------------------------------------------------- MOST POPULAR NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
 //------------------------------------------------------- ONLINE  ------------------------------------------
-    //**
-    //Step 1 - Url queries for popular news and orders the response by newest
-    //Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
-    //Step 3 - Render HTML for the popular section 
-    //Step 4 - For loop used to render 4 stories
-    //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for popular news
-    //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
-    //Step 7 - Read more button opens the modal by using the checkbox
-    //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
-    //**    
+//**
+//Step 1 - Url queries for popular news and orders the response by newest
+//Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
+//Step 3 - Render HTML for the popular section 
+//Step 4 - For loop used to render 4 stories
+//Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for popular news
+//Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
+//Step 7 - Read more button opens the modal by using the checkbox
+//Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
+//**    
     function getPopularNews() {
         $.ajax({
             type: "GET",
@@ -80,7 +80,7 @@ $(document).ready(function(){
 //------------------------------------------------------- OFFLINE  ------------------------------------------
 //**
 //Step 1 - If API call fails render the first HTML instance for popular news
-//Step 2 - If no data is stored localStorage then then render in console "No data found popular news section."
+//Step 2 - If no data is stored localStorage then render in HTML "No data found popular news section."
 //Step 3 - Split the json file to render readable data i.e. removing the %%
 //Step 4 - Loop through the length of the file using the through keys
 //**    
@@ -128,88 +128,99 @@ $(document).ready(function(){
         // Forcing a refresh of content run new ajax calls after 15mins to load latest popular news. 
         setTimeout(getPopularNews, 900000);
     };
-
+    
 //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
-// ONLINE FUNCTION
+//------------------------------------------------------- ONLINE  ------------------------------------------
 //**
-//Step 1 - Searching for anything ordering the results order of Newest
-//Step 2 - Creating an array for trending news and storying them in the local storage using headline as the key
-//Step 3 - Initiating the html of the news section which here is uk
-//Step 4 - Creating a loop for the API call to do the function 7 times
-//Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
-//Step 5 - Seperating the keys to array of top stories breaking the string by headline by dimeter "%%"
-//Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
-//Step 7 - add html to the "top" block resulting in the headline, date and thumbnial being output in cards
-//Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
-//Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
-//Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
-//Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
+//Step 1 - Url searched top stories and orders the response by newest
+//Step 2 - An array is developed for trending stories and stores the articles in localStorage with key of headline
+//Step 4 - For loop used to render 7 stories
+//Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for trending
+//Step 5 - Seperating the keys to array of trending stories breaking the string by headline by dimeter "%%"
+//Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
+//Step 7 - Read more button opens the modal by using the checkbox
+//Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
 //**  
+    
     $.ajax({
         type: "GET",
         dataType: "jsonp",
         cache: false,
-        // get the latest stories by 'newest' endpoint tag
+        // GET latest trending stories by newest relevance
         url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
         success: function (data) {
-            window.localStorage.setItem("top", "");
+            window.localStorage.setItem("topStories", "");
             for (var i = 0; i < 7; i++) {
                 if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
                     var dataString = JSON.stringify(data.response.results[i]);
                     window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
                 }
-                window.localStorage.setItem("top", window.localStorage.getItem("top") + "%%" + data.response.results[i].fields.headline)
+                window.localStorage.setItem("topStories", window.localStorage.getItem("topStories") + "%%" + data.response.results[i].fields.headline);
                 $("#slider" + i).append(`
                 <figcaption class="caption_trending_topics">
-                <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
-                <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                <footer><label class="btn btn-light mt-2"  for="modal_section_` + i + `">Read More</label></footer>
+                    <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                    <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                    <footer><label class="btn btn-light mt-2"  for="modal_section_` + i + `">Read More</label></footer>
                 </figcaption>
                `);
-                $("#topStories").append(`
-                <input class="checker" type="checkbox" id="modal_top_` + i + `">
-               <div class="modal">
+
+                $("#top-stories").append(`
+                <input class="checker" type="checkbox" id="modal_trending_` + i + `">
+                <div class="modal">
                     <div class="modal-body">
-                        <label class="btn_close" for="modal_top_` + i + `">Close</label>
+                        <label class="btn_close" for="modal_trending_` + i + `">Close</label>
                         <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
                         <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                    <div class="modal-content">` + data.response.results[i].fields.body + `</div>
+                        <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                     </div>
-            </div>
-            `);
+                </div>
+                `);
             }
         }
-
-//OFFLINE FUNCTION
+//------------------------------------------------------- OFFLINE  ------------------------------------------
+//**
+//Step 1 - If API call fails render the first HTML instance for top stories
+//Step 2 - If no data is stored localStorage then render in HTML "No data found top stories section."
+//Step 3 - Split the json file to render readable data i.e. removing the %%
+//Step 4 - Loop through the first 7 using the through keys
+//**    
     }).fail(function (jqXHR, textStatus, errorThrown) {
-        result = window.localStorage.getItem("top");
-        results =result.split('%%')
+        $("#top-stories").html('');
+        if (!window.localStorage.getItem("topStories")) {
+            $("#top-stories").html('No data found top storiea section.');
+        } else {
+            result = window.localStorage.getItem("topStories");
+            results =result.split('%%')
             for (var i = 0; i < 7; i++) {
-                console.log(results[i+1]);
                 var data = JSON.parse(window.localStorage.getItem(results[i+1]));
-                // image of article
+                // render thumbnail
                 $("#slider" + i + " > img").attr("src", data.fields.thumbnail);
-                // headline of article
+                // render headline
                 $("#slider" + i + " > img").attr("alt", data.fields.headline);
                 //outputting headline followed by.. 
-                $("#slider" + i).append(`<figcaption class="caption_trending_topics">
-                <p><label class="pointer" for="modal_top_+ i +">` + data.fields.headline + `</label></p>
+                $("#slider" + i).append(`
+                <figcaption class="caption_trending_topics">
+                    <h6 class="heading">` + data.fields.headline + `</h6>
+                    <img src="` + data.fields.thumbnail + `" alt="">
+                    <footer><label class="btn btn-light mt-2"  for="modal_section_` + i + `">Read More</label></footer>
                 </figcaption>
                `);
                 // generating the model if user clicks to view more
                 $("#topStories").append(`
-                <input class="checker" type="checkbox" id="modal_top_+ i +">
+                <input class="checker" type="checkbox" id="modal_trending_` + i + `">
                 <div class="modal">
                     <div class="modal-body">
-                        <label class="btn_close" for="modal_top_+ i +">Close</label>
+                        <label class="btn_close" for="modal_trending_` + i + `">Close</label>
                         <h6 class="heading">` + data.fields.headline + `</h6>
-                        <img src="+ data.fields.thumbnail +" alt="">
-                    <div class="modal-content">` + data.fields.body + `</div>
+                        <img src="` + data.fields.thumbnail + `" alt="">
+                        <div class="modal-content">` + data.fields.body + `</div>
                     </div>
-                </div>`);
+                </div>
+                `);
             }
-        
-})
+        }
+    })
+    
 });
 
 function getUrlParam() {
