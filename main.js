@@ -11,7 +11,7 @@ $(document).ready(function(){
     })
 
 //------------------------------------------------------- MOST POPULAR NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
-// ONLINE FUNCTION
+//------------------------------------------------------- ONLINE  ------------------------------------------
     //**
     //Step 1 - Url queries for popular news and orders the response by newest
     //Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
@@ -83,69 +83,68 @@ $(document).ready(function(){
 //Step 2 - If no data is stored localStorage then then render in console "No data found popular news section."
 //Step 3 - Split the json file to render readable data i.e. removing the %%
 //Step 4 - Loop through the length of the file using the through keys
-//** 
-}).fail(function (jqXHR, textStatus, errorThrown) {  
-    $("#most-popular").html('');
-    if (!window.localStorage.getItem("trending")) {
-        $("#most-popular").html('No data found popular news section.');
-    } else {
-        localMostPopular = window.localStorage.getItem("trending").split('%%');
-        for(var i=0; i<localMostPopular.length; i++){
-            var result = JSON.parse(window.localStorage.getItem(localMostPopular[i]));
-            if(result){
-                $("#most-popular").append(`
-                <div class="mb-4">
-                    <div class="card h-100">
-                        <h5 class="card-header">` + result.sectionName +`</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">`+ result.fields.headline +  `</h5>
-                            <img src="` + result.fields.thumbnail + `" class="card-img-top" alt="">
-                            <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
+//**    
+        }).fail(function (jqXHR, textStatus, errorThrown) {  
+            $("#most-popular").html('');
+            if (!window.localStorage.getItem("trending")) {
+                $("#most-popular").html('No data found popular news section.');
+            } else {
+                localMostPopular = window.localStorage.getItem("trending").split('%%');
+                for(var i=0; i<localMostPopular.length; i++){
+                    var result = JSON.parse(window.localStorage.getItem(localMostPopular[i]));
+                    if(result){
+                        $("#most-popular").append(`
+                        <div class="mb-4">
+                            <div class="card h-100">
+                                <h5 class="card-header">` + result.sectionName +`</h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">`+ result.fields.headline +  `</h5>
+                                    <img src="` + result.fields.thumbnail + `" class="card-img-top" alt="">
+                                    <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                <input class="checker" type="checkbox" id="modal_search_` + i + `">
-                
-                <div class="modal" style="max-width: 100vw; padding: 40px;">
-                    <div class="modal-body">
-                        <div class="modal-header">
-                            <h5 class="modal-title">` + result.fields.headline + `</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
-                            </button>
+                        
+                        <input class="checker" type="checkbox" id="modal_search_` + i + `">
+                        
+                        <div class="modal" style="max-width: 100vw; padding: 40px;">
+                            <div class="modal-body">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">` + result.fields.headline + `</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
+                                    </button>
+                                </div>
+                                <img src="` + result.fields.thumbnail + `" alt="">
+                                <div class="modal-content">` + result.fields.body  + `</div>
+                            </div>
                         </div>
-                        <img src="` + result.fields.thumbnail + `" alt="">
-                        <div class="modal-content">` + result.fields.body  + `</div>
-                    </div>
-                </div>
-                `);
+                        `);
+                    }
+                }
             }
-        }
-    }
-});
-//**
-// Forcing a refresh of content run new ajax calls after 15mins to load latest popular news. 
-//**
-        setTimeout(getPopularNews, 900000);
-};
+        })
 
-    //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
+        // Forcing a refresh of content run new ajax calls after 15mins to load latest popular news. 
+        setTimeout(getPopularNews, 900000);
+    };
+
+//------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
-    //**
-    //Step 1 - Searching for anything ordering the results order of Newest
-    //Step 2 - Creating an array for trending news and storying them in the local storage using headline as the key
-    //Step 3 - Initiating the html of the news section which here is uk
-    //Step 4 - Creating a loop for the API call to do the function 7 times
-    //Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
-    //Step 5 - Seperating the keys to array of top stories breaking the string by headline by dimeter "%%"
-    //Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
-    //Step 7 - add html to the "top" block resulting in the headline, date and thumbnial being output in cards
-    //Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
-    //Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
-    //Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
-    //Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
-    //**  
+//**
+//Step 1 - Searching for anything ordering the results order of Newest
+//Step 2 - Creating an array for trending news and storying them in the local storage using headline as the key
+//Step 3 - Initiating the html of the news section which here is uk
+//Step 4 - Creating a loop for the API call to do the function 7 times
+//Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
+//Step 5 - Seperating the keys to array of top stories breaking the string by headline by dimeter "%%"
+//Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
+//Step 7 - add html to the "top" block resulting in the headline, date and thumbnial being output in cards
+//Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
+//Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
+//Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
+//Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
+//**  
     $.ajax({
         type: "GET",
         dataType: "jsonp",
