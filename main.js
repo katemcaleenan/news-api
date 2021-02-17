@@ -8,15 +8,14 @@ $(document).ready(function(){
             autoplay: true,
             autoplaySpeed: 3000
         });
-
     })
 
-//------------------------------------------------------- TRENDING SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
+//------------------------------------------------------- MOST POPULAR  NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
     //**
-    //Step 1 - Searching for the term Trending and then ordering the results order of Newest
-    //Step 2 - Creating an array for trending news and storying them in the local storage using headline as the key
-    //Step 3 - Initiating the html of the news section which here is uk
+    //Step 1 - Url queries for trending news and orders the response by newest
+    //Step 2 - An array is developed for trending articles and stores the articles in localStorage with key of headline
+    //Step 3 - Render HTML for the trending section 
     //Step 4 - Creating a loop for the API call to do the function 9 times
     //Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
     //Step 5 - Seperating the keys to array of world breaking the string by headline by dimeter "%%"
@@ -235,7 +234,7 @@ function getUrlParam() {
     return vars;
 }
 
-//------------------------------------------------------- CATEGORIES ONLINE & OFFLINE FUNCTION  ------------------------------------------
+//------------------------------------------------------- SECTIONS ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
     //**
     //Step 1 - Searching for the section that was selected using the "data-sec" value and then ordering the results order of relevance
@@ -252,9 +251,9 @@ function getUrlParam() {
     if (section == null || section == "") {  
         section = "world"; //Home section automatically defaults to "World" news category 
     }
-        var selectedHeader = $("#HeaderSec").find("[data-sec='" + section + "']"); //Reads the heading section
-            $(selectedHeader).addClass("text-danger font-weight-bolder"); //highlights the text and changes the font to bold
-            $(selectedHeader).removeClass("text-muted");
+        var selectedSection = $("#header-section").find("[data-sec='" + section + "']"); //reads the html tag of the nav bar to find what section was selected
+            $(selectedSection).addClass("text-danger font-weight-bolder"); //jQuery to highlight the text of the section selected
+            $(selectedSection).removeClass("text-muted");
 
             const guardianSectionAPI = "https://content.guardianapis.com/search?section=" + section + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline";
 

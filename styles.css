@@ -22,18 +22,18 @@
   border-radius: 4px;
 }
 
-.blog-header {
+.news-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;
   }
   
-  .blog-header-logo {
+  .news-header-logo {
     font-family: "Playfair Display", Georgia, "Times New Roman", serif;
     font-size: 2.25rem;
     color: #272343;
   }
   
-  .blog-header-logo:hover {
+  .news-header-logo:hover {
     text-decoration: none;
   }
   
@@ -99,37 +99,37 @@
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
   
   /*
-   * Blog name and description
+   * news name and description
    */
-  .blog-title {
+  .news-title {
     margin-bottom: 0;
     font-size: 2rem;
     font-weight: 400;
   }
-  .blog-description {
+  .news-description {
     font-size: 1.1rem;
     color: #999;
   }
   
   @media (min-width: 40em) {
-    .blog-title {
+    .news-title {
       font-size: 3.5rem;
     }
   }
   
   /*
-   * Blog posts
+   * news posts
    */
-  .blog-post {
+  .news-post {
     padding: 4px;
     margin-bottom: 4rem;
     border-radius: 4px;
   }
-  .blog-post-title {
+  .news-post-title {
     margin-bottom: .25rem;
     font-size: 2.5rem;
   }
-  .blog-post-meta {
+  .news-post-meta {
     margin-bottom: 1.25rem;
     color: #999;
   }
@@ -137,14 +137,14 @@
   /*
    * Footer
    */
-  .blog-footer {
+  .news-footer {
     padding: 2.5rem 0;
     color: #999;
     text-align: center;
     background-color: #f9f9f9;
     border-top: .05rem solid #e5e5e5;
   }
-  .blog-footer p:last-child {
+  .news-footer p:last-child {
     margin-bottom: 0;
   }
 
