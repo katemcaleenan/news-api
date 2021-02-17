@@ -185,40 +185,7 @@ $(document).ready(function(){
 //Step 4 - Loop through the first 7 using the through keys
 //**    
     }).fail(function (jqXHR, textStatus, errorThrown) {
-        $("#top-stories").html('');
-        if (!window.localStorage.getItem("topStories")) {
-            $("#top-stories").html('No data found top storiea section.');
-        } else {
-            result = window.localStorage.getItem("topStories");
-            results =result.split('%%')
-            for (var i = 0; i < 7; i++) {
-                var data = JSON.parse(window.localStorage.getItem(results[i+1]));
-                // render thumbnail
-                $("#slider" + i + " > img").attr("src", data.fields.thumbnail);
-                // render headline
-                $("#slider" + i + " > img").attr("alt", data.fields.headline);
-                //outputting headline followed by.. 
-                $("#slider" + i).append(`
-                <figcaption class="caption_trending_topics">
-                    <h6 class="heading">` + data.fields.headline + `</h6>
-                    <img src="` + data.fields.thumbnail + `" alt="">
-                    <footer><label class="btn btn-light mt-2"  for="modal_section_` + i + `">Read More</label></footer>
-                </figcaption>
-               `);
-                // generating the model if user clicks to view more
-                $("#topStories").append(`
-                <input class="checker" type="checkbox" id="modal_trending_` + i + `">
-                <div class="modal">
-                    <div class="modal-body">
-                        <label class="btn_close" for="modal_trending_` + i + `">Close</label>
-                        <h6 class="heading">` + data.fields.headline + `</h6>
-                        <img src="` + data.fields.thumbnail + `" alt="">
-                        <div class="modal-content">` + data.fields.body + `</div>
-                    </div>
-                </div>
-                `);
-            }
-        }
+        $(".offline").hide();
     })
     
 });
@@ -258,7 +225,7 @@ function getUrlParam() {
             const guardianSectionAPI = "https://content.guardianapis.com/search?section=" + section + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline";
 
             
-    console.log(section)
+    console.log(guardianSectionAPI)
         $.ajax({
             type: "GET",
             dataType: "jsonp",
@@ -320,12 +287,9 @@ function getUrlParam() {
                         $("#Sections").append(`
                                     <div class="card flex-md-row mb-4 box-shadow">
                 <div class="col-md-8 card-body d-flex flex-column align-items-start">
-                <div class="banner-title">` + result.sectionName + `</div>
                     <h3 class="mb-0">
-                    <p>` + result.headline + `</p>
+                    <p>` + result.fields.headline + `</p>
                     </h3>
-                    <div>` + result.trailText + `</div>
-                    <div>` + result.main + `</div>
                     <footer><label class="btn btn-danger mt-2"  for="modal_section_` + i + `">Read More</label></footer>
                 </div>
                 </div>
@@ -333,8 +297,8 @@ function getUrlParam() {
                         <div class="modal">
                             <div class="modal-body">
                                 <label class="btn_close" for="modal_section_` + i + `">Close</label>
-                                <h6 class="heading">` + result.headline + `</h6>
-                                <div class="modal-content">` + result.body + `</div>
+                                <h6 class="heading">` + result.fields.headline + `</h6>
+                                <div class="modal-content">` + result.fields.body + `</div>
                             </div>
                         </div>
                     `);
