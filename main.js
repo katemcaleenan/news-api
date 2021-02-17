@@ -1,6 +1,6 @@
 $(document).ready(function(){    
     getSections();
-    getTrendingNews();
+    getPopularNews();
 
     $(function() {
         $(".slides").slick({
@@ -10,135 +10,125 @@ $(document).ready(function(){
         });
     })
 
-//------------------------------------------------------- MOST POPULAR  NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
+//------------------------------------------------------- MOST POPULAR NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
     //**
-    //Step 1 - Url queries for trending news and orders the response by newest
-    //Step 2 - An array is developed for trending articles and stores the articles in localStorage with key of headline
-    //Step 3 - Render HTML for the trending section 
-    //Step 4 - Creating a loop for the API call to do the function 9 times
-    //Step 5 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
-    //Step 5 - Seperating the keys to array of world breaking the string by headline by dimeter "%%"
-    //Step 6 - Getting the date of the publication of the artical and putting it into the date function created to show how old the article is (diff_minutes)
-    //Step 7 - add html to the "loadUKStories" block resulting in the headline, date and thumbnial being output in cards
-    //Step 8 - the modal itself then starts at (<div class = "modal_body">....</div>)
-    //Step 9 - a checkbox is added to check if the article is clicked to view more so it shows the correpondant modal
-    //Step 10 - To have a correspondance between the modal full view and the article, I use the parameter "i" which is used to create the "id" of the checkbox 
-    //Step 11 - The footer is used to open the modal and the btn_close is used to close the modal full view when finished reading
+    //Step 1 - Url queries for popular news and orders the response by newest
+    //Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
+    //Step 3 - Render HTML for the popular section 
+    //Step 4 - For loop used to render 4 stories
+    //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for popular news
+    //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
+    //Step 7 - Read more button opens the modal by using the checkbox
+    //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
     //**    
-    function getTrendingNews() {
+    function getPopularNews() {
         $.ajax({
             type: "GET",
             dataType: "jsonp",
             cache: false,
             url: "https://content.guardianapis.com/search?q=Trending&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec&show-fields=thumbnail,body,headline",
             success: function (data) {
-                // create an array for Trending news
+                // array created for popular news
                 window.localStorage.setItem("trending", "");
-                $(".loadTrendingNews").html('');
-                // loop to do this call four times 
+                $("#most-popular").html('');
+
+                // for loop to render the first 4 articles 
                 for (var i = 0; i < 4; i++) {
-                    ///check if the element exists already in the browser localStorage to prevent duplication
+                    // check if the key exists in localStorage eliminating duplication
                     if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
-                         // create String off of the json file (the news)
+                         // string converted into json file
                         var dataString = JSON.stringify(data.response.results[i]);
-                         // add it to localStorage with its headline as a key 
+                         // jsonfile added to local storage using the headline as key 
                         window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
                     }
 
-                    // add the headline to the array of Trending (keys are separated with %%)
-                    window.localStorage.setItem("trending", window.localStorage.getItem("trending") + "%%" + data.response.results[i].fields.headline)
-                    //getting date of the article
-                    // var dt2 = new Date(data.response.results[i].webPublicationDate);
-                    // // reunning the results of the article date with the date function lower down the page 
-                    // var res = diff_minutes(dt2);
-                    //  appending the info into the card styling and below that then I am using the i  to give for an i of which content is to be open when read more is clicked
-                    $(".loadTrendingNews").append(`
-                    <div class="col mb-4">
+                    // headlines added to the trending array
+                    // keys are created by splitting the string from the headline  using diameter "%%"
+                    window.localStorage.setItem("popular", window.localStorage.getItem("trending") + "%%" + data.response.results[i].fields.headline);
+                    // render the response data into the card
+                    // i is used to identify the article id and enables the modal to render the appropriate data
+                    $("#most-popular").append(`
+                    <div class="mb-4">
+                        <div class="card h-100">
+                            <h5 class="card-header">` +  data.response.results[i].sectionName +`</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">`+ data.response.result.fields.headline +  `</h5>
+                                <img src="` + data.response.result.fields.thumbnail + `" class="card-img-top" alt="">
+                                <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input class="checker" type="checkbox" id="modal_search_` + i + `">
+
+                    <div class="modal" style="max-width: 100vw; padding: 40px;">
+                        <div class="modal-body">
+                            <div class="modal-header">
+                                <h5 class="modal-title">` + data.response.result.fields.headline + `</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
+                                </button>
+                            </div>
+                            <img src="` + data.response.result.fields.thumbnail + `" alt="">
+                            <div class="modal-content">` + data.response.result.fields.body  + `</div>
+                        </div>
+                    </div>
+                    `);
+                }
+            }
+//------------------------------------------------------- OFFLINE  ------------------------------------------
+//**
+//Step 1 - If API call fails render the first HTML instance for popular news
+//Step 2 - If no data is stored localStorage then then render in console "No data found popular news section."
+//Step 3 - Split the json file to render readable data i.e. removing the %%
+//Step 4 - Loop through the length of the file using the through keys
+//** 
+}).fail(function (jqXHR, textStatus, errorThrown) {  
+    $("#most-popular").html('');
+    if (!window.localStorage.getItem("trending")) {
+        $("#most-popular").html('No data found popular news section.');
+    } else {
+        localMostPopular = window.localStorage.getItem("trending").split('%%');
+        for(var i=0; i<localMostPopular.length; i++){
+            var result = JSON.parse(window.localStorage.getItem(localMostPopular[i]));
+            if(result){
+                $("#most-popular").append(`
+                <div class="mb-4">
                     <div class="card h-100">
-                        <h5 class="card-header">` +  data.response.results[i].sectionName +`</h5>
+                        <h5 class="card-header">` + result.sectionName +`</h5>
                         <div class="card-body">
-                            <h5 class="card-title">`+ data.response.result.fields.headline +  `</h5>
-                            <img src="` + data.response.result.fields.thumbnail + `" class="card-img-top" alt="">
+                            <h5 class="card-title">`+ result.fields.headline +  `</h5>
+                            <img src="` + result.fields.thumbnail + `" class="card-img-top" alt="">
                             <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
                         </div>
                     </div>
                 </div>
+                
                 <input class="checker" type="checkbox" id="modal_search_` + i + `">
+                
                 <div class="modal" style="max-width: 100vw; padding: 40px;">
                     <div class="modal-body">
                         <div class="modal-header">
-                            <h5 class="modal-title">` + data.response.result.fields.headline + `</h5>
+                            <h5 class="modal-title">` + result.fields.headline + `</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
                             </button>
                         </div>
-                        <img src="` + data.response.result.fields.thumbnail + `" alt="">
-                        <div class="modal-content">` + data.response.result.fields.body  + `</div>
+                        <img src="` + result.fields.thumbnail + `" alt="">
+                        <div class="modal-content">` + result.fields.body  + `</div>
                     </div>
                 </div>
-                
-                                `);
-                }
-            }
-
-// OFFLINE
-//**
-//Step 1 - If API request fails (no network) fails initiate the html of trending stories, if not in local storage console log no results
-//Step 2 - If it wasn't searched before or stored show No data found
-//Step 3 - Break the string file up into an array of keys for example str= potato%%tomato%%carrot would then be x = [potato,tomato,carrot] after split
-//Step 4 - using first class from css file to output only 3 items per line
-//Step 5 - If i==3 articles (we already added 3 articles) the variable first user the value "first" for another line 
-//Step 6 - loop through keys like normal and get date from local storage 
-//** 
-}).fail(function (jqXHR, textStatus, errorThrown) {  
-    $(".loadTrendingNews").html('');
-    if (!window.localStorage.getItem("trending")) {
-        console.log('no results');
-        $(".loadTrendingNews").html('No data found against this search.');
-    } else {
-        resultss = window.localStorage.getItem("trending").split('%%');
-        for(var i=0; i<resultss.length;i++){
-            var result = JSON.parse(window.localStorage.getItem(resultss[i]));
-            if(result){
-                $(".loadTrendingNews").append(`
-                <div class="col mb-4">
-                                <div class="card h-100">
-                                    <h5 class="card-header">` + result.sectionName +`</h5>
-                                    <div class="card-body">
-                                        <h5 class="card-title">`+ result.fields.headline +  `</h5>
-                                        <img src="` + result.fields.thumbnail + `" class="card-img-top" alt="">
-                                        <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
-                                    </div>
-                                </div>
-                            </div>
-                            <input class="checker" type="checkbox" id="modal_search_` + i + `">
-                            <div class="modal" style="max-width: 100vw; padding: 40px;">
-                                <div class="modal-body">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">` + result.fields.headline + `</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
-                                        </button>
-                                    </div>
-                                    <img src="` + result.fields.thumbnail + `" alt="">
-                                    <div class="modal-content">` + result.fields.body  + `</div>
-                                </div>
-                            </div>
-                
                 `);
             }
-            
         }
     }
-
 });
 //**
-        // This is a refresh for content, a refresh function to refresh the page with new ajax calls. 
-        // what it is doing is forcing the page to reload and therefore load newest data.
+// Forcing a refresh of content run new ajax calls after 15mins to load latest popular news. 
 //**
-        setTimeout(getTrendingNews, 10800000);
-}
+        setTimeout(getPopularNews, 900000);
+};
 
     //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
 // ONLINE FUNCTION
