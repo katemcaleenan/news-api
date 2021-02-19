@@ -27,7 +27,7 @@ $(document).ready(function(){
             type: "GET",
             dataType: "jsonp",
             cache: false,
-            url: "https://content.guardianapis.com/search?q=Trending&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec&show-fields=thumbnail,body,headline",
+            url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline",
             success: function (data) {
                 // array created for popular news
                 window.localStorage.setItem("trending", "");
@@ -53,8 +53,8 @@ $(document).ready(function(){
                         <div class="card h-100">
                             <h5 class="card-header">` +  data.response.results[i].sectionName +`</h5>
                             <div class="card-body">
-                                <h5 class="card-title">`+ data.response.result.fields.headline +  `</h5>
-                                <img src="` + data.response.result.fields.thumbnail + `" class="card-img-top" alt="">
+                                <h5 class="card-title">`+ data.response.results[i].fields.headline +  `</h5>
+                                <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
                                 <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
                             </div>
                         </div>
@@ -65,13 +65,13 @@ $(document).ready(function(){
                     <div class="modal" style="max-width: 100vw; padding: 40px;">
                         <div class="modal-body">
                             <div class="modal-header">
-                                <h5 class="modal-title">` + data.response.result.fields.headline + `</h5>
+                                <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
                                 </button>
                             </div>
-                            <img src="` + data.response.result.fields.thumbnail + `" alt="">
-                            <div class="modal-content">` + data.response.result.fields.body  + `</div>
+                            <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                            <div class="modal-content">` + data.response.results[i].fields.body  + `</div>
                         </div>
                     </div>
                     `);
