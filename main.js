@@ -160,18 +160,21 @@ $(document).ready(function(){
                 <figcaption class="caption_trending_topics">
                     <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                    <footer><label class="btn btn-light mt-2"  for="modal_section_` + i + `">Read More</label></footer>
+                    <footer><label class="btn btn-light mt-2"  for="modal_trending_` + i + `">Read More</label></footer>
                 </figcaption>
                `);
 
                 $("#top-stories").append(`
                 <input class="checker" type="checkbox" id="modal_trending_` + i + `">
-                <div class="modal">
+                <div class="modal" style="max-width: 100vw; padding: 40px;">
                     <div class="modal-body">
-                        <label class="btn_close" for="modal_trending_` + i + `">Close</label>
-                        <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
-                        <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                        <div class="modal-content">` + data.response.results[i].fields.body + `</div>
+                        <div class="modal-header">
+                            <h5 class="modal-title trending">` + data.response.results[i].fields.headline + `</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <label class="btn_close btn btn-outline-dark" for="modal_trending_` + i + `"><i class="fa fa-times"></i></label>
+                            </button>
+                        </div>
+                        <div class="modal-content trending">` +  data.response.results[i].fields.body  + `</div>
                     </div>
                 </div>
                 `);
@@ -187,7 +190,6 @@ $(document).ready(function(){
     }).fail(function (jqXHR, textStatus, errorThrown) {
         $(".offline").hide();
     })
-    
 });
 
 function getUrlParam() {

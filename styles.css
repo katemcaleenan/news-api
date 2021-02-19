@@ -7,6 +7,10 @@
   border-radius: 4px;
 }
 
+.trending {
+  color: black;
+}
+
 .tag {
   background: red;
   color: #fff;
