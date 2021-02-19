@@ -254,13 +254,17 @@ function getUrlParam() {
                         </div>
                         </div>
                     <input class="checker" type="checkbox" id="modal_section_` + i + `">
-                                <div class="modal">
-                                    <div class="modal-body">
-                                        <label class="btn_close" for="modal_section_` + i + `">Close</label>
-                                        <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
-                                        <div class="modal-content">` + data.response.results[i].fields.body + `</div>
-                                    </div>
-                                </div>
+                    <div class="modal" style="max-width: 100vw; padding: 40px;">
+                    <div class="modal-body">
+                        <div class="modal-header">
+                            <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <label class="btn_close btn btn-outline-dark" for="modal_section_` + i + `"><i class="fa fa-times"></i></label>
+                            </button>
+                        </div>
+                        <div class="modal-content">` +  data.response.results[i].fields.body  + `</div>
+                    </div>
+                </div>
                                 `);
                 }
             }
@@ -294,11 +298,15 @@ function getUrlParam() {
                 </div>
                 </div>
             <input class="checker" type="checkbox" id="modal_section_` + i + `">
-                        <div class="modal">
+            <div class="modal" style="max-width: 100vw; padding: 40px;">
                             <div class="modal-body">
-                                <label class="btn_close" for="modal_section_` + i + `">Close</label>
-                                <h6 class="heading">` + result.fields.headline + `</h6>
-                                <div class="modal-content">` + result.fields.body + `</div>
+                                <div class="modal-header">
+                                    <h5 class="modal-title">` + result.fields.headline + `</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <label class="btn_close btn btn-outline-dark" for="modal_section_` + i + `"><i class="fa fa-times"></i></label>
+                                    </button>
+                                </div>
+                                <div class="modal-content">` +  result.fields.body  + `</div>
                             </div>
                         </div>
                     `);
