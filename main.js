@@ -238,15 +238,12 @@ $(document).ready(function() {
              $("#weatherTitle").html(location);
              $.each(data.list, function(index, val) {
                 $("#weatherResult").append(`
-                  <div class="col mb-4">
                       <div class="card h-100">
-                          <b class="card-header d-flex align-items-center">` + day + cd + `</b>
-                          <div class="card-body">
-                              <b class="card-title">` + val.main.temp + `&degC</b>
-                              <img src="https://openweathermap.org/img/w/` + val.weather[0].icon + `.png" class="card-img-top" alt='weather-icon'>
-                              <p>` + val.weather[0].description + `&degC</p>
+                          <b class="card-header bg-danger text-white">` + day + cd + `</b>
+                          <div class="card-body weather-body">
+                              <img src="https://openweathermap.org/img/w/` + val.weather[0].icon + `.png" class="card-img-top weather-icon" alt='weather-icon'>
+                            <b> ` + val.main.temp + `&degC</b>
                           </div>
-                      </div>
               `);
                 //increments the day 
                 day++;
