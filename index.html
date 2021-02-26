@@ -43,8 +43,7 @@
                   <a class="p-2 text-muted" id="help">Need help?</a>
                </nav>
             </div>
-            <div class="row offline">
-               <div class="jumbotron ml-3 mr-3 col-md-8 p-md-5 text-white rounded bg-danger">
+               <div class="jumbotron ml-3 mr-3 col-md-12 p-md-5 text-white rounded bg-danger">
                   <div id="top-stories">
                      <section id="introblocks">
                         <div class="sectiontitle">
@@ -62,11 +61,30 @@
                      </div>
                   </div>
                </div>
-               <div class="p-3 mb-3 bg-light rounded sidebar-content" id="weather">
-                  <div class="elfsight-app-d70ca721-4374-49d1-be10-3281c4bbebd3"></div>
-               </div>
-            </div>
             <!-- Search Results Section -->
+            <div class="ml-3 mr-3 col-md-12 p-md-5">
+               <div id="weatherVis">
+                  <h2 class="subtitle">Weather</h2>
+                  <br />
+                  <div class="container ">
+                    <div class="form-inline my-2 my-lg-0 justify-content-center">
+                      <input
+                        id="city"
+                        class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="weatherSearch"/>
+                      <button class="btn btn-outline-light my-2 my-sm-0" id="getWeather">
+                        🔎
+                      </button>
+                    </div>
+                    <br />
+                    <p id="werror" class="error text-center"></p>
+                    <div id="weatherResult"></div>
+                    <br />
+                  </div>
+                </div>
+            </div>
             <div class="container row3 searchContainer" style="display: none;">
                <div class="row d-flex justify-content-center">
                   <div class="col-12 col-sm-9" id="introblocks">

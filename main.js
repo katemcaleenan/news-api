@@ -1,6 +1,10 @@
 $(document).ready(function(){    
+     // Function Calls to generate dynamic content for sections
     getSections();
+     // Function Calls to generate dynamic content for popular news
     getPopularNews();
+    // Function Calls OpenWeather API to generate dynamic content for weather
+    weather();
 
     $(function() {
         $(".slides").slick({
@@ -191,6 +195,94 @@ $(document).ready(function(){
         $(".offline").hide();
     })
 });
+
+// Weather section seach value collection
+//Variable to initialise the city for weather API
+var city = "belfast";
+// Event handler calls method on click to retrieve and update city variable value
+$("#getWeather").click(function () {
+  city = $("#city").val();
+  // Method clears previous error text if set
+  $("#werror").empty();
+  // If statement to check if value has been set, if no city message displays to the user
+  if (city == "") {
+    msg = "Location Required. ";
+    $("#werror").html(msg);
+  } else {
+    // Method called to perform query search and display dynamic content
+    weather();
+  }
+});
+
+
+// Method to display weather related content
+function weather() {
+    console.log('weather called')
+    // Method checks if application is online before making a call to the Open Weather API
+    if (navigator.onLine) {
+      // Shows the weather content if online
+      $("#weatherVis").show();
+      // Variables get the current date and format the information to be legible
+      var date = new Date();
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1;
+      var y = date.getFullYear();
+      var cd = "/" + mm + "/" + y;
+      // key required for API access
+      var key = "65a93a07f12d1e716d1a81488d69ba85";
+      // Ajax request to API and returns
+      $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/forecast",
+        dataType: "json",
+        type: "get",
+        data: { q: city, appid: key, units: "metric", cnt: "7" },
+        // Retrieves the data from weather API and appends it to application
+        success: function (data) {
+          var wr = "";
+          wr += "<h5>" + data.city.name + "</h5><div class='row'>";
+          $.each(data.list, function (index, val) {
+            wr += " <div class='col center'><p>";
+            wr += dd + cd + "</p><p>";
+            wr +=
+              "<img src='https://openweathermap.org/img/w/" +
+              val.weather[0].icon +
+              ".png' alt='WeatherIcon'></p><p><b>";
+            wr += val.main.temp + "&degC </b></p><p>";
+            wr += "<span> " + val.weather[0].description + "</span>";
+            wr += "</p></div>";
+            dd++;
+          });
+          wr += "</div>";
+          $("#weatherResult").html(wr);
+        },
+        // Error method with poor request to weather API
+        error: function (jqXHR, exception) {
+          var msg = "";
+          if (jqXHR.status === 0) {
+            msg = "Not connect.\n Verify Network.";
+          } else if (jqXHR.status == 404) {
+            msg = "Requested page not found. [404]";
+          } else if (jqXHR.status == 500) {
+            msg = "Internal Server Error [500].";
+          } else if (exception === "parsererror") {
+            msg = "Requested JSON parse failed.";
+          } else if (exception === "timeout") {
+            msg = "Time out error.";
+          } else if (exception === "abort") {
+            msg = "Ajax request aborted.";
+          } else {
+            msg = "Uncaught Error.\n" + jqXHR.responseText;
+          }
+          $("#werror").html(msg);
+        },
+      });
+    } else {
+      // If application is offline then the weather API content will be hidden
+      $("#weatherVis").hide();
+    }
+  }
+
+ 
 
 function getUrlParam() {
     var vars = [], hash;
