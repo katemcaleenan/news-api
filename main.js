@@ -174,10 +174,10 @@ function getPopularNews() {
 //Variable to initialise the city for weather API
 var city = "belfast";
 // Event handler calls method on click to retrieve and update city variable value
-$("#searchWeather").click(function() {
+$("#search-weather").click(function() {
    city = $("#city").val();
    // Method clears previous error text if set
-   $("#weatherResult").empty();
+   $("#weather-result").empty();
    // Method clears previous error text if set
    $("#werror").empty();
    // If statement to check if value has been set, if no city message displays to the user
@@ -219,9 +219,9 @@ function getWeather() {
          success: function(data) {
             var location = "";
             location += "<h2>" + data.city.name + "</h2>";
-            $("#weatherTitle").html(location);
+            $("#weather-title").html(location);
             $.each(data.list, function(index, val) {
-               $("#weatherResult").append(`
+               $("#weather-result").append(`
                <div class="card h-100">
                   <b class="card-header bg-danger text-white">` + day + cd + `</b>
                   <div class="card-body weather-body">
@@ -304,14 +304,18 @@ function getSections() {
       success: function(data) {
          window.localStorage.setItem(section, "");
          console.log(section)
-         $("#Sections").html('');
+         var title = "";
+         title += "<h2>" + section.toUpperCase();
+         title += " NEWS </h2>";
+         $("#section-selected").html(title);
+         $("#sections").html('');
          for (var i = 0; i < 9; i++) {
             if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
                var dataString = JSON.stringify(data.response.results[i]);
                window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
             }
             window.localStorage.setItem(section, window.localStorage.getItem(section) + "%%" + data.response.results[i].fields.headline)
-            $("#Sections").append(`
+            $("#sections").append(`
             <div class="card flex-md-row mb-4 box-shadow">
                <div class="col-md-12 card-body d-flex flex-column align-items-start">
                   <div class="tag">` + data.response.results[i].sectionName + `</div>
@@ -350,16 +354,16 @@ function getSections() {
    //Step 6 - loop through keys like normal and get date from local storage 
    //** 
    }).fail(function(jqXHR, textStatus, errorThrown) {
-      $("#Sections").html('');
+      $("#sections").html('');
       if (!window.localStorage.getItem(section)) {
          console.log('no results');
-         $("#Sections").html('No data found against this search.');
+         $("#sections").html('No data found against this search.');
       } else {
          resultss = window.localStorage.getItem(section).split('%%');
          for (var i = 0; i < resultss.length; i++) {
             var result = JSON.parse(window.localStorage.getItem(resultss[i]));
             if (result) {
-               $("#Sections").append(`
+               $("#sections").append(`
                <div class="card flex-md-row mb-4 box-shadow">
                   <div class="col-md-8 card-body d-flex flex-column align-items-start">
                      <h3 class="mb-0">
@@ -526,7 +530,7 @@ function searchNews() {
 // Using jQuery animation to hide search results section
 //**
 
-$("#closeResults").click(function() {
+$("#close-search").click(function() {
    $(".searchContainer").slideUp(2000);
 });
  
@@ -579,7 +583,7 @@ driver.defineSteps([
       }
    },
    {
-      element: '#weatherTitle',
+      element: '#weather-title',
       popover: {
          title: 'The weather',
          description: 'Find out the weather where you are',

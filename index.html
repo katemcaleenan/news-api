@@ -50,18 +50,16 @@
                <div class="col-md-12 mb-3">
                   <div id="show-weather">
                      <div class="form-inline my-2 my-lg-0 justify-content-between">
-                        <h5 class="subtitle">Weather in: </h5> <h5 class="subtitle" id="weatherTitle"></h5>
-                        <div>
-                           <input
-                              id="city"
-                              class="form-control mr-sm-2"
-                              type="search"
-                              placeholder="Enter a city"/>
-                           <button class="btn btn-link btn-outline-light my-2 my-sm-0" id="searchWeather"><i class="fa fa-search"></i></button>
+                        <h5 class="subtitle">Weather in: </h5> <h5 class="subtitle" id="weather-title"></h5>
+                        <div class="input-group mb-3">
+                           <input type="search" class="form-control" placeholder="Enter a city" name="city" id="city" value=""/>
+                           <div class="input-group-append">
+                              <button type="submit" class="input-group-text" id="search-weather"><i class="fa fa-search"></i></button>
+                           </div>
                         </div>
                      </div>
                      <p id="weather-error" class="error text-center"></p>
-                     <div class="d-flex justify-content-between flex-wrap col-md-12" id="weatherResult"></div>
+                     <div class="d-flex justify-content-between flex-wrap col-md-12" id="weather-result"></div>
                   </div>
                </div>
             </main>
@@ -91,7 +89,7 @@
                      <div class="sectiontitle">
                         <p class="heading underline font-x2">Search Results</p>
                         <!-- Button to hide results when user is finished with search -->
-                        <button type="button" class="btn btn-outline-dark" id="closeResults" for="searchContainer"><i class="fa fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-outline-dark" id="close-search" for="searchContainer"><i class="fa fa-times"></i> Close</button>
                      </div>
                      <ul class="row row-cols-1 row-cols-md-2 loadSearchResults">
                      </ul>
@@ -100,26 +98,29 @@
             </div>
          </div>
          <main role="main" class="container">
-            <div class="row">
-               <div class="col-md-8 news-main">
-                  <!-- Categories Section -->
-                  <div class="section-post" id="Sections">
-                     <div class="d-flex align-items-center ml-4">
-                        <!-- Loading state -->
-                        <strong>Loading...</strong> 
-                        <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
+            <div class="col-md-12 mb-3">
+               <div id="section-selected"></div>
+               <div class="row">
+                  <div class="col-md-8 news-main">
+                     <!-- Categories Section -->
+                     <div class="section-post" id="sections">
+                        <div class="d-flex align-items-center ml-4">
+                           <!-- Loading state -->
+                           <strong>Loading...</strong> 
+                           <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
+                        </div>
                      </div>
                   </div>
+                  <aside class="col-md-4 news-sidebar">
+                     <!-- Most Popular section -->
+                     <div class="p-3 mb-3 bg-light rounded sidebar-content">
+                        <h4 class="font-italic" id="popular">MOST POPULAR</h4>
+                        <ul id="most-popular" class="p-0">
+                           <!-- MOST POPULAR NEWS ARTICLE SECTIONS -->
+                        </ul>
+                     </div>
+                  </aside>
                </div>
-               <aside class="col-md-4 news-sidebar">
-                  <!-- Most Popular section -->
-                  <div class="p-3 mb-3 bg-light rounded sidebar-content">
-                     <h4 class="font-italic" id="popular">MOST POPULAR</h4>
-                     <ul id="most-popular" class="nospace group btmspace-80">
-                        <!-- MOST POPULAR NEWS ARTICLE SECTIONS -->
-                     </ul>
-                  </div>
-               </aside>
             </div>
          </main>
          <footer class="news-footer">
