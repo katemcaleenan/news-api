@@ -234,7 +234,7 @@ $(document).ready(function() {
           // Retrieves the data from weather API and appends it to application
           success: function(data) {
              var location = "";
-             location += "<h5>" + data.city.name + "</h5>";
+             location += "<h2>" + data.city.name + "</h2>";
              $("#weatherTitle").html(location);
              $.each(data.list, function(index, val) {
                 $("#weatherResult").append(`

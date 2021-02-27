@@ -44,6 +44,28 @@
                   <a class="p-2 text-muted" id="help">Need help?</a>
                </nav>
             </div>
+            <main role="main" class="container">
+               <div class="col-md-12">
+                  <div id="show-weather">
+                     <div class="form-inline my-2 my-lg-0 justify-content-between">
+                        <h5 class="subtitle">Weather in: </h5> <h5 class="subtitle" id="weatherTitle"></h5>
+                        <div>
+                           <input
+                              id="city"
+                              class="form-control mr-sm-2"
+                              type="search"
+                              placeholder="Enter a city"/>
+                           <button class="btn btn-link btn-outline-light my-2 my-sm-0" id="searchWeather">
+                           <i class="fa fa-search"></i>
+                           </button>
+                        </div>
+                     </div>
+                     <p id="werror" class="error text-center"></p>
+                     <div class="d-flex justify-content-between flex-wrap col-md-12" id="weatherResult"></div>
+                     <br />
+                  </div>
+               </div>
+            </main>
             <div class="jumbotron ml-3 mr-3 col-md-12 p-md-5 text-white rounded bg-danger">
                <div id="top-stories">
                   <section id="introblocks">
@@ -63,29 +85,6 @@
                </div>
             </div>
             <!-- Search Results Section -->
-            <main role="main" class="container">
-               <div class="col-md-12">
-                  <div id="show-weather">
-                     <div class="form-inline my-2 my-lg-0 justify-content-between">
-                        <h2 class="subtitle">Weather</h2>
-                        <div>
-                           <input
-                              id="city"
-                              class="form-control mr-sm-2"
-                              type="search"
-                              placeholder="Enter a city"/>
-                           <button class="btn btn-link btn-outline-light my-2 my-sm-0" id="searchWeather">
-                           <i class="fa fa-search"></i>
-                           </button>
-                        </div>
-                     </div>
-                     <p id="werror" class="error text-center"></p>
-                     <div id="weatherTitle"></div>
-                     <div class="d-flex justify-content-between flex-wrap col-md-12" id="weatherResult"></div>
-                     <br />
-                  </div>
-               </div>
-            </main>
             <div class="container row3 searchContainer" style="display: none;">
                <div class="row d-flex justify-content-center">
                   <div class="col-12 col-sm-9" id="introblocks">
