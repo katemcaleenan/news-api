@@ -1,189 +1,192 @@
 $(document).ready(function() {
-    // Function Calls to generate dynamic content for sections
-    getSections();
-    // Function Calls to generate dynamic content for popular news
-    getPopularNews();
-    // Function Calls OpenWeather API to generate dynamic content for weather
-    weather();
- 
-    $(function() {
-       $(".slides").slick({
-          dots: true,
-          autoplay: true,
-          autoplaySpeed: 3000
-       });
-    })
- 
-    //------------------------------------------------------- MOST POPULAR NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
-    //------------------------------------------------------- ONLINE  ------------------------------------------
-    //**
-    //Step 1 - Url queries for popular news and orders the response by newest
-    //Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
-    //Step 3 - Render HTML for the popular section 
-    //Step 4 - For loop used to render 4 stories
-    //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for popular news
-    //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
-    //Step 7 - Read more button opens the modal by using the checkbox
-    //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
-    //**    
-    function getPopularNews() {
-       $.ajax({
-          type: "GET",
-          dataType: "jsonp",
-          cache: false,
-          url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline",
-          success: function(data) {
-             // array created for popular news
-             window.localStorage.setItem("trending", "");
-             $("#most-popular").html('');
- 
-             // for loop to render the first 4 articles 
-             for (var i = 0; i < 4; i++) {
-                // check if the key exists in localStorage eliminating duplication
-                if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
-                   // string converted into json file
-                   var dataString = JSON.stringify(data.response.results[i]);
-                   // jsonfile added to local storage using the headline as key 
-                   window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
-                }
- 
-                // headlines added to the trending array
-                // keys are created by splitting the string from the headline  using diameter "%%"
-                window.localStorage.setItem("popular", window.localStorage.getItem("trending") + "%%" + data.response.results[i].fields.headline);
-                // render the response data into the card
-                // i is used to identify the article id and enables the modal to render the appropriate data
-                $("#most-popular").append(`
-                      <div class="mb-4">
-                          <div class="card h-100">
-                              <h5 class="card-header">` + data.response.results[i].sectionName + `</h5>
-                              <div class="card-body">
-                                  <h5 class="card-title">` + data.response.results[i].fields.headline + `</h5>
-                                  <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
-                                  <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
-                              </div>
-                          </div>
+
+   // Function Calls to generate dynamic content for sections
+   getSections();
+   // Function Calls to generate dynamic content for popular news
+   getPopularNews();
+   // Function Calls OpenWeather API to generate dynamic content for weather
+   weather();
+
+   $(function() {
+      $(".slides").slick({
+         dots: true,
+         autoplay: true,
+         autoplaySpeed: 3000
+      });
+   })
+
+   //------------------------------------------------------- MOST POPULAR NEWS SECTION ONLINE & OFFLINE FUNCTION  ------------------------------------------
+   //------------------------------------------------------- ONLINE  ------------------------------------------
+   //**
+   //Step 1 - Url queries for popular news and orders the response by newest
+   //Step 2 - An array is developed for popular articles and stores the articles in localStorage with key of headline
+   //Step 3 - Render HTML for the popular section 
+   //Step 4 - For loop used to render 4 stories
+   //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for popular news
+   //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
+   //Step 7 - Read more button opens the modal by using the checkbox
+   //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
+   //**    
+   function getPopularNews() {
+      $.ajax({
+         type: "GET",
+         dataType: "jsonp",
+         cache: false,
+         url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline",
+         success: function(data) {
+            // array created for popular news
+            window.localStorage.setItem("trending", "");
+            $("#most-popular").html('');
+
+            // for loop to render the first 4 articles 
+            for (var i = 0; i < 4; i++) {
+               // check if the key exists in localStorage eliminating duplication
+               if (!window.localStorage.getItem(data.response.results[i].fields.headline)) {
+                  // string converted into json file
+                  var dataString = JSON.stringify(data.response.results[i]);
+                  // jsonfile added to local storage using the headline as key 
+                  window.localStorage.setItem(data.response.results[i].fields.headline, dataString);
+               }
+
+               // headlines added to the trending array
+               // keys are created by splitting the string from the headline  using diameter "%%"
+               window.localStorage.setItem("popular", window.localStorage.getItem("trending") + "%%" + data.response.results[i].fields.headline);
+               // render the response data into the card
+               // i is used to identify the article id and enables the modal to render the appropriate data
+               $("#most-popular").append(
+                 `
+                 <div class="mb-4">
+                     <div class="card h-100">
+                         <h5 class="card-header">` + data.response.results[i].sectionName + `</h5>
+                         <div class="card-body">
+                             <h5 class="card-title">` + data.response.results[i].fields.headline + `</h5>
+                             <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
+                             <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                         </div>
+                     </div>
+                 </div>
+
+                 <input class="checker" type="checkbox" id="modal_search_` + i + `">
+
+                 <div class="modal" style="max-width: 100vw; padding: 40px;">
+                     <div class="modal-body">
+                         <div class="modal-header">
+                             <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
+                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                 <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
+                             </button>
+                         </div>
+                         <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                         <div class="modal-content">` + data.response.results[i].fields.body + `</div>
+                     </div>
+                 </div>
+                 `
+               );
+              }
+           }
+        //------------------------------------------------------- OFFLINE  ------------------------------------------
+         //**
+         //Step 1 - If API call fails render the first HTML instance for popular news
+         //Step 2 - If no data is stored localStorage then render in HTML "No data found popular news section."
+         //Step 3 - Split the json file to render readable data i.e. removing the %%
+         //Step 4 - Loop through the length of the file using the through keys
+         //**   
+        }).fail(function(jqXHR, exception, errorThrown) {
+           var msg = "";
+           if (jqXHR.status === 0) {
+              msg = "Network Error.";
+           } else if (jqXHR.status == 404) {
+              msg = "Not Found. [404]";
+           } else if (jqXHR.status == 500) {
+              msg = "Internal Server Error [500].";
+           } else if (exception === "parsererror") {
+              msg = "Requested JSON parse failed.";
+           } else if (exception === "timeout") {
+              msg = "Time out error.";
+           } else if (exception === "abort") {
+              msg = "Ajax request aborted.";
+           } else {
+              msg = "Uncaught Error.\n" + jqXHR.responseText;
+           }
+           $("#most-popular").html(msg);
+        });
+        // Forcing a refresh of content run new ajax calls after 15mins to load latest popular news.
+        setTimeout(getPopularNews, 900000);
+     };
+
+   //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
+   //------------------------------------------------------- ONLINE  ------------------------------------------
+   //**
+   //Step 1 - Url searched top stories and orders the response by newest
+   //Step 2 - An array is developed for trending stories and stores the articles in localStorage with key of headline
+   //Step 4 - For loop used to render 7 stories
+   //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for trending
+   //Step 5 - Seperating the keys to array of trending stories breaking the string by headline by dimeter "%%"
+   //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
+   //Step 7 - Read more button opens the modal by using the checkbox
+   //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
+   //**  
+
+   $.ajax({
+      type: "GET",
+      dataType: "jsonp",
+      cache: false,
+      // GET latest trending stories by newest relevance
+      url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
+      success: function(data) {
+         for (var i = 0; i < 7; i++) {
+            $("#slider" + i).append(`
+              <figcaption class="caption_trending_topics">
+                  <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                  <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                  <footer><label class="btn btn-light mt-2"  for="modal_trending_` + i + `">Read More</label></footer>
+              </figcaption>
+             `);
+
+            $("#top-stories").append(`
+              <input class="checker" type="checkbox" id="modal_trending_` + i + `">
+              <div class="modal" style="max-width: 100vw; padding: 40px;">
+                  <div class="modal-body">
+                      <div class="modal-header">
+                          <h5 class="modal-title trending">` + data.response.results[i].fields.headline + `</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <label class="btn_close btn btn-outline-dark" for="modal_trending_` + i + `"><i class="fa fa-times"></i></label>
+                          </button>
                       </div>
-  
-                      <input class="checker" type="checkbox" id="modal_search_` + i + `">
-  
-                      <div class="modal" style="max-width: 100vw; padding: 40px;">
-                          <div class="modal-body">
-                              <div class="modal-header">
-                                  <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
-                                  </button>
-                              </div>
-                              <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                              <div class="modal-content">` + data.response.results[i].fields.body + `</div>
-                          </div>
-                      </div>
-                      `);
-             }
-          }
-          //------------------------------------------------------- OFFLINE  ------------------------------------------
-          //**
-          //Step 1 - If API call fails render the first HTML instance for popular news
-          //Step 2 - If no data is stored localStorage then render in HTML "No data found popular news section."
-          //Step 3 - Split the json file to render readable data i.e. removing the %%
-          //Step 4 - Loop through the length of the file using the through keys
-          //**    
-       }).fail(function(jqXHR, exception, errorThrown) {
-          var msg = "";
-          if (jqXHR.status === 0) {
-             msg = "Network Error.";
-          } else if (jqXHR.status == 404) {
-             msg = "Not Found. [404]";
-          } else if (jqXHR.status == 500) {
-             msg = "Internal Server Error [500].";
-          } else if (exception === "parsererror") {
-             msg = "Requested JSON parse failed.";
-          } else if (exception === "timeout") {
-             msg = "Time out error.";
-          } else if (exception === "abort") {
-             msg = "Ajax request aborted.";
-          } else {
-             msg = "Uncaught Error.\n" + jqXHR.responseText;
-          }
-          $("#most-popular").html(msg);
-       });
- 
-       // Forcing a refresh of content run new ajax calls after 15mins to load latest popular news. 
-       setTimeout(getPopularNews, 900000);
-    };
- 
-    //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
-    //------------------------------------------------------- ONLINE  ------------------------------------------
-    //**
-    //Step 1 - Url searched top stories and orders the response by newest
-    //Step 2 - An array is developed for trending stories and stores the articles in localStorage with key of headline
-    //Step 4 - For loop used to render 7 stories
-    //Step 5 - Duplication check: used to check if the key already exists in storage and if not then stores the new array for trending
-    //Step 5 - Seperating the keys to array of trending stories breaking the string by headline by dimeter "%%"
-    //Step 6 - Dynamicly insert the headline, body and thumbnail data into cards
-    //Step 7 - Read more button opens the modal by using the checkbox
-    //Step 8 - Using the i parameter the modal renders the article info for the appropriate articles that was selected by being passed in the checkbox
-    //**  
- 
-    $.ajax({
-       type: "GET",
-       dataType: "jsonp",
-       cache: false,
-       // GET latest trending stories by newest relevance
-       url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
-       success: function(data) {
-          for (var i = 0; i < 7; i++) {
-             $("#slider" + i).append(`
-                  <figcaption class="caption_trending_topics">
-                      <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
-                      <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                      <footer><label class="btn btn-light mt-2"  for="modal_trending_` + i + `">Read More</label></footer>
-                  </figcaption>
-                 `);
- 
-             $("#top-stories").append(`
-                  <input class="checker" type="checkbox" id="modal_trending_` + i + `">
-                  <div class="modal" style="max-width: 100vw; padding: 40px;">
-                      <div class="modal-body">
-                          <div class="modal-header">
-                              <h5 class="modal-title trending">` + data.response.results[i].fields.headline + `</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <label class="btn_close btn btn-outline-dark" for="modal_trending_` + i + `"><i class="fa fa-times"></i></label>
-                              </button>
-                          </div>
-                          <div class="modal-content trending">` + data.response.results[i].fields.body + `</div>
-                      </div>
+                      <div class="modal-content trending">` + data.response.results[i].fields.body + `</div>
                   </div>
-                  `);
-          }
-       }
-       //------------------------------------------------------- OFFLINE  ------------------------------------------
-       //**
-       //Step 1 - If API call fails render the first HTML instance for top stories
-       //Step 2 - If no data is stored localStorage then render in HTML "No data found top stories section."
-       //Step 3 - Split the json file to render readable data i.e. removing the %%
-       //Step 4 - Loop through the first 7 using the through keys
-       //**    
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-       var msg = "";
-       if (jqXHR.status === 0) {
-          msg = "Network Error.";
-       } else if (jqXHR.status == 404) {
-          msg = "Not Found. [404]";
-       } else if (jqXHR.status == 500) {
-          msg = "Internal Server Error [500].";
-       } else if (exception === "parsererror") {
-          msg = "Requested JSON parse failed.";
-       } else if (exception === "timeout") {
-          msg = "Time out error.";
-       } else if (exception === "abort") {
-          msg = "Ajax request aborted.";
-       } else {
-          msg = "Uncaught Error.\n" + jqXHR.responseText;
-       }
-       $("#top-stories").html(msg);
-    })
- });
+              </div>
+            `);
+           }
+        }
+     //------------------------------------------------------- OFFLINE  ------------------------------------------
+      //**
+      //Step 1 - If API call fails render the first HTML instance for top stories
+      //Step 2 - If no data is stored localStorage then render in HTML "No data found top stories section."
+      //Step 3 - Split the json file to render readable data i.e. removing the %%
+      //Step 4 - Loop through the first 7 using the through keys
+      //**  
+     }).fail(function(jqXHR, textStatus, errorThrown) {
+        var msg = "";
+        if (jqXHR.status === 0) {
+           msg = "Network Error.";
+        } else if (jqXHR.status == 404) {
+           msg = "Not Found. [404]";
+        } else if (jqXHR.status == 500) {
+           msg = "Internal Server Error [500].";
+        } else if (exception === "parsererror") {
+           msg = "Requested JSON parse failed.";
+        } else if (exception === "timeout") {
+           msg = "Time out error.";
+        } else if (exception === "abort") {
+           msg = "Ajax request aborted.";
+        } else {
+           msg = "Uncaught Error.\n" + jqXHR.responseText;
+        }
+        $("#top-stories").html(msg);
+     })
+
+});
  
  // Weather section seach value collection
  //Variable to initialise the city for weather API

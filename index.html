@@ -6,7 +6,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="web icon" type="image/svg" href="assets/logo.png" alt="icon"/>
       <title>Uni News</title>
-      <!-- Bootstrap core CSS -->
+      <!-- Links -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" crossorigin="anonymous">
@@ -17,12 +17,14 @@
    </head>
    <body>
       <div class="content">
+         <!-- Header Section  -->
          <div class="container">
             <header class="news-header py-3">
                <div class="row flex-nowrap justify-content-between">
                   <div class="col-4">
                      <img class="news-header-logo text-dark" src="assets/uni-news.png" alt="logo">
                   </div>
+                  <!-- Search input -->
                   <div class="col-4 d-flex justify-content-end align-items-center">
                      <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search" name="search" id="search" value=""/>
@@ -44,8 +46,9 @@
                   <a class="p-2 text-muted" id="help">Need help?</a>
                </nav>
             </div>
+            <!-- Weather Section -->
             <main role="main" class="container">
-               <div class="col-md-12">
+               <div class="col-md-12 mb-3">
                   <div id="show-weather">
                      <div class="form-inline my-2 my-lg-0 justify-content-between">
                         <h5 class="subtitle">Weather in: </h5> <h5 class="subtitle" id="weatherTitle"></h5>
@@ -55,17 +58,15 @@
                               class="form-control mr-sm-2"
                               type="search"
                               placeholder="Enter a city"/>
-                           <button class="btn btn-link btn-outline-light my-2 my-sm-0" id="searchWeather">
-                           <i class="fa fa-search"></i>
-                           </button>
+                           <button class="btn btn-link btn-outline-light my-2 my-sm-0" id="searchWeather"><i class="fa fa-search"></i></button>
                         </div>
                      </div>
                      <p id="werror" class="error text-center"></p>
                      <div class="d-flex justify-content-between flex-wrap col-md-12" id="weatherResult"></div>
-                     <br />
                   </div>
                </div>
             </main>
+            <!-- Top Stories section -->
             <div class="jumbotron ml-3 mr-3 col-md-12 p-md-5 text-white rounded bg-danger">
                <div id="top-stories">
                   <section id="introblocks">
@@ -84,7 +85,7 @@
                   </div>
                </div>
             </div>
-            <!-- Search Results Section -->
+            <!-- Search Results Section which is hidden on load-->
             <div class="container row3 searchContainer" style="display: none;">
                <div class="row d-flex justify-content-center">
                   <div class="col-12 col-sm-9" id="introblocks">
@@ -102,6 +103,7 @@
          <main role="main" class="container">
             <div class="row">
                <div class="col-md-8 news-main">
+                  <!-- Categories Section -->
                   <div class="section-post" id="Sections">
                      <div class="d-flex align-items-center ml-4">
                         <!-- Loading state -->
@@ -109,10 +111,9 @@
                         <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
                      </div>
                   </div>
-                  <!-- /.section-post -->
                </div>
-               <!-- /.news-main -->
                <aside class="col-md-4 news-sidebar">
+                  <!-- Most Popular section -->
                   <div class="p-3 mb-3 bg-light rounded sidebar-content">
                      <h4 class="font-italic" id="popular">MOST POPULAR</h4>
                      <ul id="most-popular" class="nospace group btmspace-80">
@@ -120,11 +121,8 @@
                      </ul>
                   </div>
                </aside>
-               <!-- /.news-sidebar -->
             </div>
-            <!-- /.row -->
          </main>
-         <!-- /.container -->
          <footer class="news-footer">
             <p>By Kate McAleenan.</p>
             <p>
@@ -132,7 +130,7 @@
             </p>
          </footer>
       </div>
-      <!-- Bootstrap core JavaScript
+      <!-- Scripts
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"
