@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
    // Function Calls to generate dynamic content for sections
    getSections();
@@ -7,13 +7,13 @@ $(document).ready(function() {
    // Function Calls OpenWeather API to generate dynamic content for weather
    getWeather();
 
-   $(function() {
+   $(function () {
       $(".slides").slick({
          dots: true,
          autoplay: true,
          autoplaySpeed: 3000
       });
-   })  
+   })
 
    //------------------------------------------------------- TOP STORIES SLIDER ONLINE & OFFLINE FUNCTION  ------------------------------------------
    //------------------------------------------------------- ONLINE  ------------------------------------------
@@ -34,7 +34,7 @@ $(document).ready(function() {
       cache: false,
       // GET latest trending stories by newest relevance
       url: "https://content.guardianapis.com/search?q=&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
-      success: function(data) {
+      success: function (data) {
          for (var i = 0; i < 7; i++) {
             $("#slider" + i).append(`
               <figcaption class="caption_trending_topics">
@@ -58,32 +58,32 @@ $(document).ready(function() {
                   </div>
               </div>
             `);
-           }
-        }
+         }
+      }
       //------------------------------------------------------- OFFLINE  ------------------------------------------
       //**
       //Step 1 - If API call fails check the status code
       //Step 2 - Based on status code render the appropriate error in HTML
       //** 
-     }).fail(function(jqXHR, textStatus, errorThrown) {
-        var msg = "";
-        if (jqXHR.status === 0) {
-           msg = "Network Error.";
-        } else if (jqXHR.status == 404) {
-           msg = "Not Found. [404]";
-        } else if (jqXHR.status == 500) {
-           msg = "Internal Server Error [500].";
-        } else if (exception === "parsererror") {
-           msg = "Requested JSON parse failed.";
-        } else if (exception === "timeout") {
-           msg = "Time out error.";
-        } else if (exception === "abort") {
-           msg = "Ajax request aborted.";
-        } else {
-           msg = "Uncaught Error.\n" + jqXHR.responseText;
-        }
-        $("#top-stories").html(msg);
-     })
+   }).fail(function (jqXHR, textStatus, errorThrown) {
+      var msg = "";
+      if (jqXHR.status === 0) {
+         msg = "Network Error.";
+      } else if (jqXHR.status == 404) {
+         msg = "Not Found. [404]";
+      } else if (jqXHR.status == 500) {
+         msg = "Internal Server Error [500].";
+      } else if (exception === "parsererror") {
+         msg = "Requested JSON parse failed.";
+      } else if (exception === "timeout") {
+         msg = "Time out error.";
+      } else if (exception === "abort") {
+         msg = "Ajax request aborted.";
+      } else {
+         msg = "Uncaught Error.\n" + jqXHR.responseText;
+      }
+      $("#top-stories").html(msg);
+   })
 });
 
 
@@ -104,7 +104,7 @@ function getPopularNews() {
       dataType: "jsonp",
       cache: false,
       url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline",
-      success: function(data) {
+      success: function (data) {
          $("#most-popular").html('');
          // for loop to render the first 10 articles 
          for (var i = 0; i < 10; i++) {
@@ -142,12 +142,12 @@ function getPopularNews() {
             `);
          }
       }
-   //------------------------------------------------------- OFFLINE  ------------------------------------------
-   //**
-   //Step 1 - If API call fails check the status code
-   //Step 2 - Based on status code render the appropriate error in HTML
-   //** 
-   }).fail(function(jqXHR, exception, errorThrown) {
+      //------------------------------------------------------- OFFLINE  ------------------------------------------
+      //**
+      //Step 1 - If API call fails check the status code
+      //Step 2 - Based on status code render the appropriate error in HTML
+      //** 
+   }).fail(function (jqXHR, exception, errorThrown) {
       var msg = "";
       if (jqXHR.status === 0) {
          msg = "Network Error.";
@@ -169,12 +169,12 @@ function getPopularNews() {
    // Forcing a refresh of content run new ajax calls after 15mins to load latest popular news.
    setTimeout(getPopularNews, 900000);
 };
- 
+
 // Weather section seach value collection
 //Variable to initialise the city for weather API
 var city = "belfast";
 // Event handler calls method on click to retrieve and update city variable value
-$("#search-weather").click(function() {
+$("#search-weather").click(function () {
    city = $("#city").val();
    // Method clears previous error text if set
    $("#weather-result").empty();
@@ -189,7 +189,7 @@ $("#search-weather").click(function() {
       getWeather();
    }
 });
- 
+
 // Method to display weather related content
 function getWeather() {
    // Method checks if application is online before making a call to the Open Weather API
@@ -216,11 +216,11 @@ function getWeather() {
             cnt: "7"
          },
          // Retrieves the data from weather API and appends it to application
-         success: function(data) {
+         success: function (data) {
             var location = "";
             location += "<h2>" + data.city.name + "</h2>";
             $("#weather-title").html(location);
-            $.each(data.list, function(index, val) {
+            $.each(data.list, function (index, val) {
                $("#weather-result").append(`
                <div class="card h-100">
                   <b class="card-header bg-danger text-white">` + day + cd + `</b>
@@ -234,12 +234,12 @@ function getWeather() {
                day++;
             });
          }
-      //------------------------------------------------------- OFFLINE  ------------------------------------------
-      //**
-      //Step 1 - If API call fails check the status code
-      //Step 2 - Based on status code render the appropriate error in HTML
-      //**  
-      }).fail(function(jqXHR, exception, errorThrown) {
+         //------------------------------------------------------- OFFLINE  ------------------------------------------
+         //**
+         //Step 1 - If API call fails check the status code
+         //Step 2 - Based on status code render the appropriate error in HTML
+         //**  
+      }).fail(function (jqXHR, exception, errorThrown) {
          var msg = "";
          if (jqXHR.status === 0) {
             msg = "Network Error.";
@@ -274,17 +274,17 @@ function getUrlParam() {
    }
    return vars;
 }
- 
- //------------------------------------------------------- SECTIONS ONLINE & OFFLINE FUNCTION  ------------------------------------------
- // ONLINE FUNCTION
- //**
- //Step 1 - Searching for the section that was selected using the "data-sec" value and then ordering the results order of relevance
- //Step 2 - Creating an array for category then storing in the local storage with headline as the key
- //Step 3 - Render HTML looping through the top 9 stories
- //Step 4 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
- //Step 5 - Seperating the keys into sections breaking the string by headline by dimeter "%%"
- //Step 6 - Develop modal when clicked "read more" using check box 
- //**      
+
+//------------------------------------------------------- SECTIONS ONLINE & OFFLINE FUNCTION  ------------------------------------------
+// ONLINE FUNCTION
+//**
+//Step 1 - Searching for the section that was selected using the "data-sec" value and then ordering the results order of relevance
+//Step 2 - Creating an array for category then storing in the local storage with headline as the key
+//Step 3 - Render HTML looping through the top 9 stories
+//Step 4 - Duplication check - check if key doesn't exists in localStorage, if not then store it with headline as the key
+//Step 5 - Seperating the keys into sections breaking the string by headline by dimeter "%%"
+//Step 6 - Develop modal when clicked "read more" using check box 
+//**      
 function getSections() {
    var section = getUrlParam()["category"];
    if (section == null || section == "") {
@@ -301,7 +301,7 @@ function getSections() {
       dataType: "jsonp",
       cache: false,
       url: guardianSectionAPI,
-      success: function(data) {
+      success: function (data) {
          window.localStorage.setItem(section, "");
          console.log(section)
          var title = "";
@@ -344,16 +344,16 @@ function getSections() {
             `);
          }
       }
-   // OFFLINE
-   //**
-   //Step 1 - If API request fails (no network) fails initiate the html of World stories, if not in local storage console log no results
-   //Step 2 - If it wasn't searched before or stored show No data found
-   //Step 3 - Break the string file up into an array of keys for example str= potato%%tomato%%carrot would then be x = [potato,tomato,carrot] after split
-   //Step 4 - using first class from css file to output only 3 items per line
-   //Step 5 - If i==3 articles (if it already has added 3 articles) the variable first user the value "first" for another line 
-   //Step 6 - loop through keys like normal and get date from local storage 
-   //** 
-   }).fail(function(jqXHR, textStatus, errorThrown) {
+      // OFFLINE
+      //**
+      //Step 1 - If API request fails (no network) fails initiate the html of World stories, if not in local storage console log no results
+      //Step 2 - If it wasn't searched before or stored show No data found
+      //Step 3 - Break the string file up into an array of keys for example str= potato%%tomato%%carrot would then be x = [potato,tomato,carrot] after split
+      //Step 4 - using first class from css file to output only 3 items per line
+      //Step 5 - If i==3 articles (if it already has added 3 articles) the variable first user the value "first" for another line 
+      //Step 6 - loop through keys like normal and get date from local storage 
+      //** 
+   }).fail(function (jqXHR, textStatus, errorThrown) {
       $("#sections").html('');
       if (!window.localStorage.getItem(section)) {
          console.log('no results');
@@ -397,7 +397,7 @@ function getSections() {
    //**
    setTimeout(getSections, 10800000);
 }
- 
+
 //------------------------------------------------------ SEARCH ------------------------------------------//
 //**
 // 1 - Check if search is not empty then input the search value into the api url and order by relevance.
@@ -414,26 +414,26 @@ function searchNews() {
    var searchInput = $("#search").val();
    if (searchInput !== "") {
       $.ajax({
-            type: "GET",
-            dataType: "jsonp",
-            cache: false,
-            url: "https://content.guardianapis.com/search?q=" + searchInput + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
-            success: function(data) {
-               console.log("Your search has been made");
-               $(".searchContainer").show();
-               $('html, body').animate({
-                  scrollTop: $(".searchContainer").offset().top - 10
-               }, 2000);
-               if (data.response.total == 0) {
-                  $(".loadSearchResults").html('No results found against this search.');
-               } else {
-                  if (!window.localStorage.getItem("search" + searchInput)) {
-                     var dataResponse = JSON.stringify(data.response.results);
-                     window.localStorage.setItem("search" + searchInput, dataResponse);
-                  }
-                  $(".loadSearchResults").html("");
-                  for (var i = 0; i <= 9; i++) {
-                     $(".loadSearchResults").append(`
+         type: "GET",
+         dataType: "jsonp",
+         cache: false,
+         url: "https://content.guardianapis.com/search?q=" + searchInput + "&order-by=relevance&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=thumbnail,body,headline",
+         success: function (data) {
+            console.log("Your search has been made");
+            $(".searchContainer").show();
+            $('html, body').animate({
+               scrollTop: $(".searchContainer").offset().top - 10
+            }, 2000);
+            if (data.response.total == 0) {
+               $(".loadSearchResults").html('No results found against this search.');
+            } else {
+               if (!window.localStorage.getItem("search" + searchInput)) {
+                  var dataResponse = JSON.stringify(data.response.results);
+                  window.localStorage.setItem("search" + searchInput, dataResponse);
+               }
+               $(".loadSearchResults").html("");
+               for (var i = 0; i <= 9; i++) {
+                  $(".loadSearchResults").append(`
                      <div class="col mb-4">
                            <div class="card h-100">
                               <h5 class="card-header">` + data.response.results[i].sectionName + `</h5>
@@ -460,31 +460,31 @@ function searchNews() {
                            </div>
                      </div>
                      `);
-                  }
                }
-            },
+            }
+         },
          //------------------------------------------------------ OFFLINE ------------------------------------------//
          //**
          // 1 - If the API call fails then check if the search input exists by searching local storage.
          // 2 - Parse the results of the search value from local storage into a JSON file and the render HTML.
          //**
-         }).fail(function(jqXHR, textStatus, errorThrown) {
-            if ($(".loadSearchResults").html(""),
-               $(".searchContainer").show(),
-               $("html, body").animate({
-                  scrollTop: $(".searchContainer").offset().top - 10
-               }, 2000),
-               window.localStorage.getItem("search" + searchInput)
-            ) {
-               searchResults = window.localStorage.getItem("search" + searchInput);
-               results = JSON.parse(searchResults);
-               for (var o = 0; o < results.length; o++) {
-                  var first = "";
-                  if (o % 3 == 0) {
-                     first = "first";
-                  }
-                  var response = results[o];
-                  $(".loadSearchResults").append(`
+      }).fail(function (jqXHR, textStatus, errorThrown) {
+         if ($(".loadSearchResults").html(""),
+            $(".searchContainer").show(),
+            $("html, body").animate({
+               scrollTop: $(".searchContainer").offset().top - 10
+            }, 2000),
+            window.localStorage.getItem("search" + searchInput)
+         ) {
+            searchResults = window.localStorage.getItem("search" + searchInput);
+            results = JSON.parse(searchResults);
+            for (var o = 0; o < results.length; o++) {
+               var first = "";
+               if (o % 3 == 0) {
+                  first = "first";
+               }
+               var response = results[o];
+               $(".loadSearchResults").append(`
                   <div class="col mb-4">
                         <div class="card h-100">
                            <h5 class="card-header">` + response.sectionName + `</h5>
@@ -511,41 +511,41 @@ function searchNews() {
                         </div>
                   </div>
                   `);
-               }
-               $(".searchContainer").show();
-            } else {
-               console.log("no results");
-               $(".loadSearchResults").html("No data found against this search.");
             }
-         })
+            $(".searchContainer").show();
+         } else {
+            console.log("no results");
+            $(".loadSearchResults").html("No data found against this search.");
+         }
+      })
    } else {
       // hide the search section until a search is made
       ($(".searchContainer").hide(),
-      $(".loadSearchResults").html(""))
+         $(".loadSearchResults").html(""))
    }
 }
- 
+
 //------------------------------------------------------ CLOSE SEARCH -------------------------------------------------//
 //**
 // Using jQuery animation to hide search results section
 //**
 
-$("#close-search").click(function() {
+$("#close-search").click(function () {
    $(".searchContainer").slideUp(2000);
 });
- 
+
 //---------------------------------------------------- Driver.js Walkthrough Scripting -----------------------------------------------------------------//
 //**
 // This code below is the JS for driver.js helper tool to identify what is said at each part of the walkthrough
 // The tool is being instructed to highlight each section by the id or class name, then renders the information in a popover
 //  https://github.com/kamranahmedse/driver.js
 //**
- 
-$("#help").click(function() {
+
+$("#help").click(function () {
    // Start the introduction
    driver.start();
 });
- 
+
 // Initiate step by step guide using the id 
 const driver = new Driver();
 driver.defineSteps([
