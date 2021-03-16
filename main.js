@@ -38,9 +38,11 @@ $(document).ready(function () {
          for (var i = 0; i < 7; i++) {
             $("#slider" + i).append(`
               <figcaption class="caption_trending_topics">
+              <div class="d-flex align-items-center">
                   <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
+                  <label class="btn btn-light ml-2"  for="modal_trending_` + i + `">Read More</label>
+              </div>
                   <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
-                  <footer><label class="btn btn-light mt-2"  for="modal_trending_` + i + `">Read More</label></footer>
               </figcaption>
              `);
 
@@ -194,6 +196,7 @@ $("#search-weather").click(function () {
 function getWeather() {
    // Method checks if application is online before making a call to the Open Weather API
    if (navigator.onLine) {
+      $("#weather-error").hide();
       // Shows the weather content if online
       $("#show-weather").show();
       // Variables get the current date and format the information to be legible
@@ -223,7 +226,7 @@ function getWeather() {
             $.each(data.list, function (index, val) {
                $("#weather-result").append(`
                <div class="card h-100">
-                  <b class="card-header bg-danger text-white">` + day + cd + `</b>
+                  <b class="card-header p-0 bg-danger text-white" style="display: flex; justify-content: center;">` + day + cd + `</b>
                   <div class="card-body weather-body">
                      <img src="https://openweathermap.org/img/w/` + val.weather[0].icon + `.png" class="card-img-top weather-icon" alt='weather-icon'>
                      <b> ` + val.main.temp + `&degC</b>
@@ -256,6 +259,7 @@ function getWeather() {
          } else {
             msg = "Uncaught Error.\n" + jqXHR.responseText;
          }
+         $("#weather-error").show();
          $("#weather-error").html(msg);
       });
    } else {
