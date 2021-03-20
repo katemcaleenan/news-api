@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
    // Function Calls to generate dynamic content for sections
    getSections();
    // Function Calls to generate dynamic content for popular news
@@ -107,7 +106,6 @@ function getPopularNews() {
       cache: false,
       url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline,thumbnail",
       success: function (data) {
-         console.log(data);
          $("#most-popular").html('');
          // for loop to render the first 10 articles 
          for (var i = 0; i < 10; i++) {
@@ -191,6 +189,16 @@ $("#search-weather").click(function () {
       // Method called to perform query search and display dynamic content
       getWeather();
    }
+});
+
+//------------------------------------------------------- CONTRAST THEMES  ------------------------------------------
+$("a.button-toggle-highcontrast").click(function () {
+   $("body").addClass("highcontrast");
+   $(".subtitle").addClass("subtitle-contrast");
+});
+$("a.button-toggle-remove").click(function () {
+   $("body").removeClass('highcontrast');
+   $(".subtitle").removeClass("subtitle-contrast");
 });
 
 // Method to display weather related content
