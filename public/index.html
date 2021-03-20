@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="web icon" type="image/svg" href="assets/logo.png" alt="icon" />
+   <title>Test News</title>
+   <!-- Links -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      crossorigin="anonymous">
+   <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
+   <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+   <div class="content">
+      <!-- Header Section  -->
+      <div class="container">
+         <header class="news-header py-3">
+            <div class="row flex-nowrap justify-content-between">
+               <div class="col-4">
+                  <img class="news-header-logo text-dark" src="assets/uni-news.png" alt="logo">
+               </div>
+               <!-- Search input -->
+               <div class="col-4 d-flex justify-content-end align-items-center">
+                  <div class="input-group mb-3">
+                     <input type="text" class="form-control" placeholder="Search" name="search" id="search" value="" />
+                     <div class="input-group-append">
+                        <button type="submit" class="input-group-text" onclick="searchNews();"><i
+                              class="fa fa-search"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <!-- Navigation Section -->
+         <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between" id="header-section">
+               <a class="p-2 text-muted" data-sec="world" href="?category=world">World news</a>
+               <a class="p-2 text-muted" data-sec="sport" href="?category=sport">Sport</a>
+               <a class="p-2 text-muted" id="politics" data-sec="politics" href="?category=politics">Politics</a>
+               <a class="p-2 text-muted" data-sec="technology" href="?category=technology">Technology</a>
+               <a class="p-2 text-muted" data-sec="education" href="?category=education">Education</a>
+               <a class="p-2 text-muted" id="help">Need help?</a>
+            </nav>
+         </div>
+         <!-- Weather Section -->
+         <main role="main" class="container">
+            <div class="col-md-12 mb-3">
+               <div id="show-weather">
+                  <div class="form-inline my-2 my-lg-0 justify-content-between">
+                     <h5 class="subtitle">Weather in: </h5>
+                     <h5 class="subtitle" id="weather-title"></h5>
+                     <div class="input-group mb-3">
+                        <input type="search" class="form-control" placeholder="Enter a city" name="city" id="city"
+                           value="" />
+                        <div class="input-group-append">
+                           <button type="submit" class="input-group-text" id="search-weather"><i
+                                 class="fa fa-search"></i></button>
+                        </div>
+                     </div>
+                  </div>
+                  <p id="weather-error" class="error text-center"></p>
+                  <div class="d-flex justify-content-between flex-wrap col-md-12" id="weather-result"></div>
+               </div>
+            </div>
+         </main>
+         <!-- Top Stories section -->
+         <div class="jumbotron ml-3 mr-3 col-md-12 p-md-5 text-white rounded bg-danger">
+            <div id="top-stories">
+               <section id="introblocks">
+                  <div class="sectiontitle">
+                     <h4 class="font-italic">Recent Top Stories</h4>
+                  </div>
+               </section>
+               <div class="slides slider mb-0">
+                  <div id="slider0"></div>
+                  <div id="slider1"></div>
+                  <div id="slider2"></div>
+                  <div id="slider3"></div>
+                  <div id="slider4"></div>
+                  <div id="slider5"></div>
+                  <div id="slider6"></div>
+               </div>
+            </div>
+         </div>
+         <!-- Search Results Section which is hidden on load-->
+         <div class="container row3 searchContainer" style="display: none;">
+            <div class="row d-flex justify-content-center">
+               <div class="col-12 col-sm-9" id="introblocks">
+                  <div class="sectiontitle">
+                     <p class="heading underline font-x2">Search Results</p>
+                     <!-- Button to hide results when user is finished with search -->
+                     <button type="button" class="btn btn-outline-dark" id="close-search" for="searchContainer"><i
+                           class="fa fa-times"></i> Close</button>
+                  </div>
+                  <ul class="row row-cols-1 row-cols-md-2 loadSearchResults">
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <main role="main" class="container">
+         <div class="col-md-12 mb-3">
+            <div id="section-selected"></div>
+            <div class="row">
+               <div class="col-md-8 news-main">
+                  <!-- Categories Section -->
+                  <div class="section-post" id="sections">
+                     <div class="d-flex align-items-center ml-4">
+                        <!-- Loading state -->
+                        <strong>Loading...</strong>
+                        <div class="spinner-border text-primary ml-auto" role="status" aria-hidden="true"></div>
+                     </div>
+                  </div>
+               </div>
+               <aside class="col-md-4 news-sidebar">
+                  <!-- Most Popular section -->
+                  <div class="p-3 mb-3 bg-light rounded sidebar-content">
+                     <h4 class="font-italic" id="popular">MOST POPULAR</h4>
+                     <ul id="most-popular" class="p-0">
+                        <!-- MOST POPULAR NEWS ARTICLE SECTIONS -->
+                     </ul>
+                  </div>
+               </aside>
+            </div>
+         </div>
+      </main>
+      <footer class="news-footer">
+         <p>By Kate McAleenan.</p>
+         <!-- return to top -->
+         <p>
+            <a href="#">Back to top</a>
+         </p>
+      </footer>
+   </div>
+   <!-- Scripts
+         ================================================== -->
+   <!-- Placed at the end of the document so the pages loads faster -->
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   <script src="https://unpkg.com/driver.js/dist/driver.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"> </script>
+   <script src="main.js"></script>
+   <script src="https://use.fontawesome.com/3016e4c184.js"></script>
+   <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+</body>
+
+</html>
