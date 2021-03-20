@@ -42,7 +42,7 @@ $(document).ready(function () {
                   <h6 class="heading">` + data.response.results[i].fields.headline + `</h6>
                   <label class="btn btn-light ml-2"  for="modal_trending_` + i + `">Read More</label>
               </div>
-                  <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                  <img src="` + data.response.results[i].fields.thumbnail + `" height="300" width="500" alt="trending thumbnail">
               </figcaption>
              `);
 
@@ -105,8 +105,9 @@ function getPopularNews() {
       type: "GET",
       dataType: "jsonp",
       cache: false,
-      url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline",
+      url: "https://content.guardianapis.com/search?q=popular&order-by=newest&api-key=f2501b62-5dde-4bda-aaf2-3f824948fec8&show-fields=main,trailText,body,headline,thumbnail",
       success: function (data) {
+         console.log(data);
          $("#most-popular").html('');
          // for loop to render the first 10 articles 
          for (var i = 0; i < 10; i++) {
@@ -121,23 +122,23 @@ function getPopularNews() {
                      <h5 class="card-header">` + data.response.results[i].sectionName + `</h5>
                      <div class="card-body">
                         <h5 class="card-title">` + data.response.results[i].fields.headline + `</h5>
-                        <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
-                        <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
+                        <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" height="180" width="330" alt="popular news thumbnail">
+                        <a href="#" class="btn btn-danger mt-2"><label for="modal_popular_` + i + `">Read Full Story</label></a>
                      </div>
                   </div>
             </div>
 
-            <input class="checker" type="checkbox" id="modal_search_` + i + `">
+            <input class="checker" type="checkbox" id="modal_popular_` + i + `">
 
             <div class="modal" style="max-width: 100vw; padding: 40px;">
                   <div class="modal-body">
                      <div class="modal-header">
                         <h5 class="modal-title">` + data.response.results[i].fields.headline + `</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
+                              <label class="btn_close btn btn-outline-dark" for="modal_popular_` + i + `"><i class="fa fa-times"></i></label>
                         </button>
                      </div>
-                     <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                     <img src="` + data.response.results[i].fields.thumbnail + `"  height="300" width="500" alt="popular news thumbnail">
                      <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                   </div>
             </div>
@@ -228,7 +229,7 @@ function getWeather() {
                <div class="card h-100">
                   <b class="card-header p-0 bg-danger text-white" style="display: flex; justify-content: center;">` + day + cd + `</b>
                   <div class="card-body weather-body">
-                     <img src="https://openweathermap.org/img/w/` + val.weather[0].icon + `.png" class="card-img-top weather-icon" alt='weather-icon'>
+                     <img src="https://openweathermap.org/img/w/` + val.weather[0].icon + `.png" class="card-img-top weather-icon" height="30" width="30" alt="weather icon">
                      <b> ` + val.main.temp + `&degC</b>
                   </div>
                </div>
@@ -443,7 +444,7 @@ function searchNews() {
                               <h5 class="card-header">` + data.response.results[i].sectionName + `</h5>
                               <div class="card-body">
                                  <h5 class="card-title">` + data.response.results[i].fields.headline + `</h5>
-                                 <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top" alt="">
+                                 <img src="` + data.response.results[i].fields.thumbnail + `" class="card-img-top"  height="170" width="280" alt="search thumbnail">
                                  <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + i + `">Read Full Story</label></a>
                               </div>
                            </div>
@@ -459,7 +460,7 @@ function searchNews() {
                                        <label class="btn_close btn btn-outline-dark" for="modal_search_` + i + `"><i class="fa fa-times"></i></label>
                                  </button>
                               </div>
-                              <img src="` + data.response.results[i].fields.thumbnail + `" alt="">
+                              <img src="` + data.response.results[i].fields.thumbnail + `" height="300" width="500" alt="search thumbnail">
                               <div class="modal-content">` + data.response.results[i].fields.body + `</div>
                            </div>
                      </div>
@@ -494,7 +495,7 @@ function searchNews() {
                            <h5 class="card-header">` + response.sectionName + `</h5>
                            <div class="card-body">
                               <h5 class="card-title">` + response.fields.headline + `</h5>
-                              <img src="` + response.fields.thumbnail + `" class="card-img-top" alt="">
+                              <img src="` + response.fields.thumbnail + `" class="card-img-top" height="170" width="280" alt="search thumbnail">
                               <a href="#" class="btn btn-danger mt-2"><label for="modal_search_` + o + `">Read Full Story</label></a>
                            </div>
                         </div>
@@ -510,7 +511,7 @@ function searchNews() {
                                     <label class="btn_close btn btn-outline-dark" for="modal_search_` + o + `"><i class="fa fa-times"></i></label>
                               </button>
                            </div>
-                           <img src="` + response.fields.thumbnail + `" alt="">
+                           <img src="` + response.fields.thumbnail + `" height="300" width="500" alt="search thumbnail">
                            <div class="modal-content">` + response.fields.body + `</div>
                         </div>
                   </div>
