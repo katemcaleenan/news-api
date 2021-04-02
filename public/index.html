@@ -14,7 +14,9 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
       crossorigin="anonymous">
    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-   <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous" />
    <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.min.css">
    <link href="styles.css" rel="stylesheet">
 </head>
@@ -30,13 +32,24 @@
                </div>
                <!-- Search input -->
                <div class="col-4 d-flex justify-content-end align-items-center">
-                  <div class="input-group mb-3">
+                  <div class="input-group mr-3">
                      <input type="text" class="form-control" placeholder="Search" name="search" id="search" value="" />
                      <div class="input-group-append">
-                        <button type="submit" class="input-group-text" onclick="searchNews();"><i
-                              class="fa fa-search"></i></button>
+                        <button type="submit" class="input-group-text" onclick="searchNews();">
+                           <i class="fa fa-search"></i>
+                        </button>
                      </div>
                   </div>
+                  <button class="btn btn-dark">
+                     <a href="#!" class="button-toggle-highcontrast text-white">
+                        <i class="fas fa-moon"></i>
+                     </a>
+                  </button>
+                  <button class="btn btn-light">
+                     <a href="#!" class="button-toggle-remove text-dark">
+                        <i class="far fa-moon"></i>
+                     </a>
+                  </button>
                </div>
             </div>
          </header>
@@ -51,8 +64,7 @@
                <a class="p-2 text-muted" id="help">Need help?</a>
             </nav>
          </div>
-         <a href="#!" class="button-toggle-highcontrast">Click to Make Dark</a>
-         <a href="#!" class="button-toggle-remove">Click to Remove</a>
+
          <!-- Weather Section -->
          <main role="main" class="container">
             <div class="col-md-12 mb-3">

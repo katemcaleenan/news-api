@@ -14,14 +14,14 @@ body {
   }
 }
 
-/* The only bit you need */
 .highcontrast {
-  background-color: black;
+  background-color: black !important;
+
 
   a, a:visited { color: white;  }
 }
 
-.subtitle-contrast {
+.text-contrast {
   color: white !important;
 }
 

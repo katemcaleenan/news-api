@@ -193,12 +193,12 @@ $("#search-weather").click(function () {
 
 //------------------------------------------------------- CONTRAST THEMES  ------------------------------------------
 $("a.button-toggle-highcontrast").click(function () {
-   $("body").addClass("highcontrast");
-   $(".subtitle").addClass("subtitle-contrast");
+   $("body, .card, .sidebar-content, .news-footer").addClass("highcontrast");
+   $("p, b, h5, figcaption, .subtitle").addClass("text-contrast");
 });
 $("a.button-toggle-remove").click(function () {
-   $("body").removeClass('highcontrast');
-   $(".subtitle").removeClass("subtitle-contrast");
+   $("body, .card, .sidebar-content, .news-footer").removeClass('highcontrast');
+   $("p, b, h5, figcaption, .subtitle").removeClass("text-contrast");
 });
 
 // Method to display weather related content
